@@ -9,3 +9,7 @@ app = Flask(__name__)
 def api():
     return jsonify({'message': 'Hello, World!'})
     
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

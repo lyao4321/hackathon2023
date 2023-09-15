@@ -28,9 +28,9 @@ COPY . .
 # Set flask environment variables
 ENV FLASK_APP=/backend/server.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=6000
+ENV FLASK_RUN_PORT=8080
 
-EXPOSE 6000
+EXPOSE 8080
 
 CMD ["python", "-m", "flask", "run"]
 
