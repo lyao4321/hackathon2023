@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-build
+    ports:
+      - "3000:3000"
+    working_dir: /frontend
+    command: npm start
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
