@@ -1,2 +1,2 @@
-flask==1.1.2
+flask
 # Add any other dependencies you might have

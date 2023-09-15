@@ -3,8 +3,7 @@ FROM python:3.8-slim-buster as backend
 
 WORKDIR /backend
 COPY ./backend/server.py .
-COPY ./backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Use node as the parent image for frontend
 FROM node:14 as frontend-build
@@ -22,6 +21,9 @@ FROM python:3.8-slim-buster
 WORKDIR /backend
 COPY --from=backend /backend /backend
 COPY --from=frontend-build /frontend/build /frontend
+COPY ./backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
 
 # Set flask environment variables
 ENV FLASK_APP=/backend/server.py
