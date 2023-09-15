@@ -1,15 +1,23 @@
 import React from 'react';
-import './App.css';
-import Login from './pages/Login';
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Navigate
+} from 'react-router-dom';
+import Login from './containers/Login';
+import Register from './containers/Register';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Login></Login>
-      </header>
-    </div>
-  );
+const App: React.FC = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/" element={<Navigate to="/login" />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
