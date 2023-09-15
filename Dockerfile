@@ -2,9 +2,9 @@
 FROM python:3.8-slim-buster as backend
 
 WORKDIR /backend
-COPY app.py .
-
-RUN pip install flask
+COPY ./backend/server.py .
+COPY ./backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Use node as the parent image for frontend
 FROM node:14 as frontend-build
@@ -18,18 +18,17 @@ RUN npm run build
 # Final image combining both
 FROM python:3.8-slim-buster
 
-WORKDIR /app
+# Copy Flask application and React build
+WORKDIR /backend
 COPY --from=backend /backend /backend
 COPY --from=frontend-build /frontend/build /frontend
 
 # Set flask environment variables
-ENV FLASK_APP=/backend/app.py
+ENV FLASK_APP=/backend/server.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
+ENV FLASK_RUN_PORT=6000
 
-# Install necessary packages and libraries
-RUN pip install flask
+EXPOSE 6000
 
-EXPOSE 5000
+CMD ["python", "-m", "flask", "run"]
 
-CMD ["flask", "run"]
