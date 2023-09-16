@@ -1,2 +1,3 @@
+python-dotenv
 flask
 # Add any other dependencies you might have
