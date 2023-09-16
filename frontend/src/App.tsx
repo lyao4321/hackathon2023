@@ -8,11 +8,13 @@ import {
 import Login from './containers/Login';
 import Register from './containers/Register';
 import Navbar from './containers/Navbar';
+import RegisterBar from './containers/RegisterBar';
 
 const App: React.FC = () => {
     return (
         <Router>
             <Routes>
+                <Route path="/rbar" element={<RegisterBar isCompany={false}/>} />
                 <Route path="/nav" element={<Navbar />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
