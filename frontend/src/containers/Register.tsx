@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Button,
     Container,
@@ -13,7 +14,7 @@ function Register(): React.ReactElement {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-
+    const [error , setError] = useState<boolean>(false);
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -29,9 +30,10 @@ function Register(): React.ReactElement {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-
+	setError(false);
         if (password !== confirmPassword) {
             console.error("Passwords don't match!");
+	    setError(true);
             return;
         }
 
@@ -87,11 +89,14 @@ function Register(): React.ReactElement {
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                     />
+		    {error?<p style={{color:'red'}}>Passwords don't match!</p>:<p></p>}
+
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
+			onClick={handleSubmit}
                     >
                         Register
                     </Button>
