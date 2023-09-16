@@ -10,6 +10,8 @@ import Login from './containers/Login';
 import Navbar from './containers/Navbar';
 import MenteeRegisterFull from './containers/MenteeRegisterFull';
 import CompanyRegisterFull from './containers/CompanyRegisterFull.tsx';
+import AboutUs from './containers/AboutUs';
+import UserForm from './containers/Dashboard';
 
 
 const App: React.FC = () => {
@@ -21,7 +23,10 @@ const App: React.FC = () => {
                 <Route path="/company/register" element={<CompanyRegisterFull/>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<MenteeRegisterFull />} />
-                <Route path="/" element={<Navigate to="/nav" />} />
+                <Route path="/" element={<Navigate to="/aboutus" />} />
+                <Route path="/aboutus" element={<AboutUs/>}/>
+
+                <Route path="/dashboard" element={<UserForm/>}/>
             </Routes>
         </Router>
     );
