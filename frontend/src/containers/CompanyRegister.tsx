@@ -8,20 +8,24 @@ import {
     Link,
 } from '@mui/material';
 
-function Register(): React.ReactElement {
-
+function CompanyRegister(): React.ReactElement {
     const [email, setEmail] = useState<string>('');
+    const [company, setCompany] =  useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
     };
 
+    const handleCompanyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCompany(event.target.value);
+    };
+
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     };
+
 
     const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setConfirmPassword(event.target.value);
@@ -37,6 +41,7 @@ function Register(): React.ReactElement {
 
         // Handle registration logic here
         console.log('Email:', email);
+        console.log('Company:', company);
         console.log('Password:', password);
     };
 
@@ -45,7 +50,7 @@ function Register(): React.ReactElement {
             <CssBaseline />
             <div>
                 <Typography component="h1" variant="h5">
-                    Job Seeker Register
+                    Company Register
                 </Typography>
                 <form noValidate onSubmit={handleSubmit}>
                     <TextField
@@ -61,6 +66,21 @@ function Register(): React.ReactElement {
                         value={email}
                         onChange={handleEmailChange}
                     />
+
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="company"
+                        label="Company"
+                        name="company"
+                        autoComplete="company"
+                        autoFocus
+                        value={company}
+                        onChange={handleCompanyChange}
+                    />
+
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -96,7 +116,7 @@ function Register(): React.ReactElement {
                         Register
                     </Button>
                     <Typography variant="body2" align="center" style={{ marginTop: '16px' }}>
-                        Already have an account? <Link href="/login" variant="body2">Click here to login</Link>
+                        Already have a company account? <Link href="/company/login" variant="body2">Click here to login</Link>
                     </Typography>
                 </form>
             </div>
@@ -104,4 +124,4 @@ function Register(): React.ReactElement {
     );
 }
 
-export default Register;
+export default CompanyRegister;

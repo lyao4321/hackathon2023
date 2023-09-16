@@ -7,10 +7,11 @@ import {
     Typography,
     CssBaseline,
 } from '@mui/material';
-import '../styles/login.css';
-import RegisterBar from './RegisterBar';
+import '../styles/companyLogin.css';
 
-function Login(): React.ReactElement {
+
+function CompanyLogin(): React.ReactElement {
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -31,13 +32,13 @@ function Login(): React.ReactElement {
 
     return (
         <Container component="main" maxWidth="lg">
-        <div className="grid-container">
-
-            <div className="container1">
-            <CssBaseline />
+        
+        <div className='grid-container'>
+            <div className='container1'>
+                <CssBaseline />
                 <div>
                     <Typography component="h1" variant="h5">
-                        Job Seeker Login
+                        Company Login
                     </Typography>
                     <form noValidate onSubmit={handleSubmit}>
                         <TextField
@@ -76,15 +77,13 @@ function Login(): React.ReactElement {
                         </Button>
                     </form>
                     <Typography variant="body2" align="center" style={{ marginTop: '16px' }}>
-                        Don't have an account? <Link href="/register" variant="body2">Click here to register</Link>
+                        Don't have a company account? <Link href="/company/register" variant="body2">Click here to register</Link>
                     </Typography>
-
                 </div>
-
             </div>
 
             <div className='container2'>
-                <p>Seek <b>Opportunities</b> and <b>Get Hired</b></p>
+                <p>Make <b>Data-Driven</b> Hiring <b>Decisions</b></p>
             </div>
 
         </div>
@@ -92,4 +91,4 @@ function Login(): React.ReactElement {
     );
 }
 
-export default Login;
+export default CompanyLogin;
