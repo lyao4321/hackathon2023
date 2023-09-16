@@ -1,5 +1,5 @@
 # Use an official Python runtime as the parent image
-FROM python:3.12-slim-buster as backend
+FROM python:3.8-slim-buster as backend
 
 WORKDIR /backend
 COPY ./backend/server.py .
@@ -15,7 +15,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Final image combining both
-FROM python:3.12-slim-buster
+FROM python:3.8-slim-buster
 
 # Copy Flask application and React build
 WORKDIR /backend
