@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Link,
     Button,
@@ -13,6 +14,8 @@ import RegisterBar from './RegisterBar';
 function Login(): React.ReactElement {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const navigation = useNavigate();
+
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -22,17 +25,36 @@ function Login(): React.ReactElement {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        // Handle login logic here
-        fetch('http://localhost:8080/api/login', {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify({
-        email: email,
-        password: password
-  })
-});
+        try {
+            const response = await fetch('http://localhost:8080/api/login', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+            const data = await response.json();
+            if (response.status === 200 && data.token) {
+                // Save the token as before
+                sessionStorage.setItem('token', data.token);
+        
+                // Redirect using the new API
+                navigation('/');
+            }
+            else {
+                // Handle any login errors here. You might want to set some state to display an error message to the user.
+                console.error(data.error);
+            }
+        } catch (error) {
+            // Handle fetch errors here. E.g., network issues or invalid JSON responses.
+            console.error('Error fetching:', error);
+        }
     };
 
     return (
