@@ -5,20 +5,23 @@ import {
     Routes,
     Navigate
 } from 'react-router-dom';
+import CompanyLogin from './containers/CompanyLogin';
 import Login from './containers/Login';
-import Register from './containers/Register';
 import Navbar from './containers/Navbar';
-import RegisterBar from './containers/RegisterBar';
+import MenteeRegisterFull from './containers/MenteeRegisterFull';
+import CompanyRegisterFull from './containers/CompanyRegisterFull.tsx';
+
 
 const App: React.FC = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/rbar" element={<RegisterBar isCompany={false}/>} />
                 <Route path="/nav" element={<Navbar />} />
+                <Route path="/company/login" element={<CompanyLogin />} />
+                <Route path="/company/register" element={<CompanyRegisterFull/>} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/register" element={<MenteeRegisterFull />} />
+                <Route path="/" element={<Navigate to="/nav" />} />
             </Routes>
         </Router>
     );

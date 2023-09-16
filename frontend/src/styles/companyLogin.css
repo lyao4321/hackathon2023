@@ -1,0 +1,16 @@
+.grid-container {
+    margin-top: 20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two columns of equal width */
+    gap: 100px; /* Provides a gap between the two divs */
+}
+
+.container1 {
+    /* Any specific styles you want for container1 */
+    font-size: 30px;
+}
+
+.container2 {
+    /* Any specific styles you want for container2 */
+    font-size: 30px;
+}
