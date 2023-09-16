@@ -31,13 +31,17 @@ function RegisterBar({ isCompany }: RegisterBarProps) {
     setAnchorElNav(null);
   };
 
+  const pageRoutes = {
+    'Mentor Sign up': '/company/register',
+    'Mentee Sign Up': '/register',
+  };  
+
   const navigateSite = (page: string) => {
     handleCloseNavMenu();
-    if (page === 'Mentor Sign up') {
-      navigate('/company/register');  
-    }
-    else {
-      navigate('/register');  
+    type PageKey = keyof typeof pageRoutes;
+    const route = pageRoutes[page as PageKey];
+    if (route) {
+      navigate(route);
     }
   };
   
