@@ -4,27 +4,30 @@ import database as db
 import os
 from dotenv import load_dotenv
 import jwt
+from flask_cors import CORS
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
-@app.route('/api', methods=['GET'])
-def api():
-    return jsonify({'message': 'Hello World'})
+CORS(app)
 
-
-@app.route('/login', methods=['GET','POST'])
+@app.route('/api/login', methods=['GET','POST'])
 def login():
     data = request.get_json()
-    username = data['username']
-    user = db.client_users.find_one({'username': 'camerontoy'})
-    print(user)
+    if not data or 'email' not in data:
+        return jsonify({'error': 'email is required'}), 400
+    email = data['email']
+    # Check if the email exists in the database
+    user = db.client_users.find_one({'email': email})
+
+    # If the user is not found in the database
     if user is None:
-        return user
+        return jsonify({'error': 'User not found'}), 404
     else:
-        token = jwt.encode({'username': 'camerontoy'}, app.config['SECRET_KEY'])
+        # Generate a JWT token for the user and return it
+        token = jwt.encode({'email': email}, app.config['SECRET_KEY'], algorithm='HS256')
         return jsonify({'token': token.decode('UTF-8')})
     
 

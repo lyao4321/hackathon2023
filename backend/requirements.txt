@@ -2,4 +2,5 @@ python-dotenv
 flask
 pymongo
 jwt
+flask-cors
 # Add any other dependencies you might have

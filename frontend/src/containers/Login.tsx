@@ -25,8 +25,14 @@ function Login(): React.ReactElement {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         // Handle login logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
+        fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+        email: email,
+        password: password
+  })
+});
     };
 
     return (
