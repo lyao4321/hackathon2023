@@ -11,6 +11,7 @@ import {
 
 function Register(): React.ReactElement {
 
+    const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -28,20 +29,48 @@ function Register(): React.ReactElement {
         setConfirmPassword(event.target.value);
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+   
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 	setError(false);
         if (password !== confirmPassword) {
             console.error("Passwords don't match!");
 	    setError(true);
             return;
-        }
-
-        // Handle registration logic here
-        console.log('Email:', email);
+	}
+	console.log('Email:', email);
         console.log('Password:', password);
-    };
 
+        try {
+            const response = await fetch('http://localhost:8080/api/register', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+            const data = await response.json();
+	    console.log(data);
+            if (response.status === 200) {
+                // Save the token as before
+                console.log(data);
+                sessionStorage.setItem('token', data.token);
+        
+                // Redirect using the new API
+                navigate('/');
+            }
+            else {
+                console.error(data.error);
+            }
+        } catch (error) {
+            // Handle fetch errors here. E.g., network issues or invalid JSON responses.
+            console.error('Error fetching:', error);
+        }
+    };
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />

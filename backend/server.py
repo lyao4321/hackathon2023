@@ -1,5 +1,4 @@
-from flask import Flask, jsonify, request, redirect, url_for
-# from flask_jwt_extended import JWT, jwt_required
+from flask import Flask, request, jsonify
 import database as db
 import os
 from dotenv import load_dotenv
@@ -12,7 +11,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 CORS(app, resources={r'/*': {'origins': '*'}}, supports_credentials=True)
-
 @app.route('/api/login', methods=['GET','POST'])
 def login():
     data = request.get_json()
@@ -29,10 +27,27 @@ def login():
         # Generate a JWT token for the user and return it
         token = jwt.encode({'email': email}, app.config['SECRET_KEY'], algorithm='HS256')
         return jsonify({'token': token}), 200  # Added 200 response code here
+
+@app.route('/api/register', methods=['POST'])
+def register():
+    data = request.get_json()
     
+    email = data['email']
+    existUser = db.client_users.find_one({'email': email})
+    if existUser:
+        return jsonify({'error' : 'existing email in use'}), 400
+    name = data.get('name')
+    password = data.get('password')  
+    new_user = {
+        'email': email,
+        'name': name,  
+        'password': password,
+    }
 
-
-
+    db.client_users.insert_one(new_user)
+    token = jwt.encode({'email': email}, app.config['SECRET_KEY'], algorithm='HS256')
+    print(token)
+    return jsonify({'token': token}), 200 
 
 if __name__ == '__main__':
     app.run(debug=True)
