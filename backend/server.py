@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_jwt_extended import JWT, jwt_required
+# from flask_jwt_extended import JWT, jwt_required
 from pymongo import MongoClient
 
 app = Flask(__name__)
