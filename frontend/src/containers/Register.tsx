@@ -13,6 +13,7 @@ function Register(): React.ReactElement {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
+    const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [error , setError] = useState<boolean>(false);
@@ -29,7 +30,10 @@ function Register(): React.ReactElement {
         setConfirmPassword(event.target.value);
     };
 
-   
+    const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUsername(event.target.value);
+    };
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 	setError(false);
@@ -49,6 +53,7 @@ function Register(): React.ReactElement {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    username: username,
                     email: email,
                     password: password
                 })
@@ -79,6 +84,19 @@ function Register(): React.ReactElement {
                     Job Seeker Register
                 </Typography>
                 <form noValidate onSubmit={handleSubmit}>
+                <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        value={username}
+                        onChange={handleUsernameChange}
+                    />
                     <TextField
                         variant="outlined"
                         margin="normal"
