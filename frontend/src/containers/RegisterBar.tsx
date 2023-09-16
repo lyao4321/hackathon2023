@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,10 +17,11 @@ const pages = ['Mentor Sign up', 'Mentee Sign Up'];
 
 interface RegisterBarProps {
     isCompany: boolean;
-  }
+  } 
 
 function RegisterBar({ isCompany }: RegisterBarProps) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -28,11 +31,25 @@ function RegisterBar({ isCompany }: RegisterBarProps) {
     setAnchorElNav(null);
   };
 
+  const navigateSite = (page: string) => {
+    handleCloseNavMenu();
+    if (page === 'Mentor Sign up') {
+      navigate('/company/register');  
+    }
+    else {
+      navigate('/register');  
+    }
+  };
+  
+  const goHome = () => {
+    navigate('/')
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} onClick={goHome}/>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -41,7 +58,7 @@ function RegisterBar({ isCompany }: RegisterBarProps) {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            >
+            >gi
               <MenuIcon />
             </IconButton>
             <Menu
@@ -76,7 +93,7 @@ function RegisterBar({ isCompany }: RegisterBarProps) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => navigateSite(page)}
                 sx={{ my: 2,
                      color: 'white',
                       display: 'block',

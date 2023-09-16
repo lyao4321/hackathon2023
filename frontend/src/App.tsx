@@ -8,9 +8,8 @@ import {
 import CompanyLogin from './containers/CompanyLogin';
 import Login from './containers/Login';
 import Navbar from './containers/Navbar';
-import MenteeRegisterFull from './containers/MenteeRegisterFull';
-import CompanyRegisterFull from './containers/CompanyRegisterFull.tsx';
-
+import CompanyRegister from './containers/CompanyRegister';
+import Register from './containers/Register';
 
 const App: React.FC = () => {
     return (
@@ -18,9 +17,9 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/nav" element={<Navbar />} />
                 <Route path="/company/login" element={<CompanyLogin />} />
-                <Route path="/company/register" element={<CompanyRegisterFull/>} />
+                <Route path="/company/register" element={<CompanyRegister />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<MenteeRegisterFull />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Navigate to="/nav" />} />
             </Routes>
         </Router>

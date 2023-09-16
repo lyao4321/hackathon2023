@@ -7,6 +7,7 @@ import {
     CssBaseline,
     Link,
 } from '@mui/material';
+import RegisterBar from './RegisterBar';
 
 function CompanyRegister(): React.ReactElement {
     const [email, setEmail] = useState<string>('');
@@ -46,6 +47,8 @@ function CompanyRegister(): React.ReactElement {
     };
 
     return (
+        <>
+        <RegisterBar isCompany={true} />
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div>
@@ -121,6 +124,7 @@ function CompanyRegister(): React.ReactElement {
                 </form>
             </div>
         </Container>
+        </>
     );
 }
 

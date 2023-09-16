@@ -8,6 +8,7 @@ import {
     CssBaseline,
     Link,
 } from '@mui/material';
+import RegisterBar from './RegisterBar';
 
 function Register(): React.ReactElement {
 
@@ -43,6 +44,8 @@ function Register(): React.ReactElement {
     };
 
     return (
+        <>
+        <RegisterBar isCompany={false}/>
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div>
@@ -106,6 +109,7 @@ function Register(): React.ReactElement {
                 </form>
             </div>
         </Container>
+        </>
     );
 }
 

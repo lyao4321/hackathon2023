@@ -9,7 +9,6 @@ import {
     CssBaseline,
 } from '@mui/material';
 import '../styles/login.css';
-import RegisterBar from './RegisterBar';
 
 function Login(): React.ReactElement {
     const [email, setEmail] = useState<string>('');
