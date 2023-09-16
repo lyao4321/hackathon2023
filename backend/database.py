@@ -7,7 +7,7 @@ from pymongo.mongo_client import MongoClient
 
 load_dotenv()
 
-uri = os.getenv("mongodb+srv://adeland:boWpe6PnOM8yu7Xs@cluster0.m1cajrn.mongodb.net/?retryWrites=true&w=majority")
+uri = os.getenv('MONGO_URI')
 
 client = MongoClient(uri)
 
