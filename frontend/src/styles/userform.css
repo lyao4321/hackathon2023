@@ -1,0 +1,54 @@
+/* Main grid layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: auto;  /* Adjusting height to auto so it only takes the required space */
+    padding: 0px 20px 50px; /* Padding top, left/right, and bottom */
+}
+
+/* Styling the left side container */
+.container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center;
+    background-color: #f7f9fc;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the right side container */
+.container2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center;
+    background-color: #e1e8ed;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+}
+
+/* Additional typography styling */
+.container2 p {
+    font-weight: 300;
+}
+
+.container2 b {
+    font-weight: bold;
+}
+
+/* Styling the individual form fields for a consistent look */
+.container1 .MuiTextField-root {
+    margin-bottom: 16px;
+}
+
+/* Button styling */
+.container1 .MuiButton-root {
+    margin-top: 20px;
+}
+
+/* Any other styles you'd like to add */
+/* ... */

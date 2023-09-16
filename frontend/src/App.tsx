@@ -11,7 +11,8 @@ import Navbar from './containers/Navbar';
 import MenteeRegisterFull from './containers/MenteeRegisterFull';
 import CompanyRegisterFull from './containers/CompanyRegisterFull.tsx';
 import AboutUs from './containers/AboutUs';
-import UserForm from './containers/Dashboard';
+import UserDashboard from './containers/Dashboard';
+import UserForm from './containers/UserForm';
 
 
 const App: React.FC = () => {
@@ -26,7 +27,8 @@ const App: React.FC = () => {
                 <Route path="/" element={<Navigate to="/aboutus" />} />
                 <Route path="/aboutus" element={<AboutUs/>}/>
 
-                <Route path="/dashboard" element={<UserForm/>}/>
+                <Route path="/dashboard" element={<UserDashboard/>}/>
+                <Route path="/user/form" element={<UserForm/>}/>
             </Routes>
         </Router>
     );
