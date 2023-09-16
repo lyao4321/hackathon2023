@@ -8,10 +8,11 @@ import {
 import CompanyLogin from './containers/CompanyLogin';
 import Login from './containers/Login';
 import Navbar from './containers/Navbar';
-import CompanyRegister from './containers/CompanyRegister';
-import Register from './containers/Register';
+import MenteeRegisterFull from './containers/Register';
+import CompanyRegisterFull from './containers/CompanyRegister';
 import AboutUs from './containers/AboutUs';
-import UserForm from './containers/Dashboard';
+import UserDashboard from './containers/Dashboard';
+import UserForm from './containers/UserForm';
 
 
 const App: React.FC = () => {
@@ -20,12 +21,14 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/nav" element={<Navbar />} />
                 <Route path="/company/login" element={<CompanyLogin />} />
-                <Route path="/company/register" element={<CompanyRegister />} />
+                <Route path="/company/register" element={<CompanyRegisterFull/>} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<MenteeRegisterFull />} />
                 <Route path="/" element={<Navigate to="/aboutus" />} />
                 <Route path="/aboutus" element={<AboutUs/>}/>
-                <Route path="/dashboard" element={<UserForm/>}/>
+
+                <Route path="/dashboard" element={<UserDashboard/>}/>
+                <Route path="/user/form" element={<UserForm/>}/>
             </Routes>
         </Router>
     );
