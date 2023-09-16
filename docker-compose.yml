@@ -10,6 +10,10 @@ services:
       - "3000:3000"
     working_dir: /frontend
     command: npm start
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+
 
   backend:
     build:
