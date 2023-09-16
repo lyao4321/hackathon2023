@@ -2,7 +2,8 @@
 FROM python:3.8-slim-buster as backend
 
 WORKDIR /backend
-COPY ./backend/server.py .
+COPY ./backend/ .
+
 
 
 # Use node as the parent image for frontend
