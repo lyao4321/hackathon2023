@@ -10,6 +10,9 @@ import Login from './containers/Login';
 import Navbar from './containers/Navbar';
 import CompanyRegister from './containers/CompanyRegister';
 import Register from './containers/Register';
+import AboutUs from './containers/AboutUs';
+import UserForm from './containers/Dashboard';
+
 
 const App: React.FC = () => {
     return (
@@ -20,7 +23,9 @@ const App: React.FC = () => {
                 <Route path="/company/register" element={<CompanyRegister />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/" element={<Navigate to="/nav" />} />
+                <Route path="/" element={<Navigate to="/aboutus" />} />
+                <Route path="/aboutus" element={<AboutUs/>}/>
+                <Route path="/dashboard" element={<UserForm/>}/>
             </Routes>
         </Router>
     );

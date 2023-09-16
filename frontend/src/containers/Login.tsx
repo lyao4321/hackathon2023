@@ -11,13 +11,13 @@ import {
 import '../styles/login.css';
 
 function Login(): React.ReactElement {
-    const [email, setEmail] = useState<string>('');
+    const [credential, setCredential] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const navigation = useNavigate();
 
 
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
+    const handleCredentialChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCredential(event.target.value);
     };
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ function Login(): React.ReactElement {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: email,
+                    credential: credential,
                     password: password
                 })
             });
@@ -72,13 +72,13 @@ function Login(): React.ReactElement {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="credential"
+                            label="Email Address or Username"
+                            name="credential"
+                            autoComplete="credential"
                             autoFocus
-                            value={email}
-                            onChange={handleEmailChange}
+                            value={credential}
+                            onChange={handleCredentialChange}
                         />
                         <TextField
                             variant="outlined"
