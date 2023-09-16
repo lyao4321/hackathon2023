@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request, redirect, url_for
 # from flask_jwt_extended import JWT, jwt_required
 import database as db
 import os
@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
-CORS(app)
+CORS(app, resources={r'/*': {'origins': '*'}}, supports_credentials=True)
 
 @app.route('/api/login', methods=['GET','POST'])
 def login():
@@ -28,11 +28,8 @@ def login():
     else:
         # Generate a JWT token for the user and return it
         token = jwt.encode({'email': email}, app.config['SECRET_KEY'], algorithm='HS256')
-        return jsonify({'token': token.decode('UTF-8')})
+        return jsonify({'token': token}), 200  # Added 200 response code here
     
-
-
-        
 
 
 
