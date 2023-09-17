@@ -14,6 +14,7 @@ import AboutUs from './containers/AboutUs';
 import UserDashboard from './containers/Dashboard';
 import UserForm from './containers/UserForm';
 import UserProfile from './containers/UserProfile';
+import CompanyForm from './containers/CompanyForm';
 
 
 const App: React.FC = () => {
@@ -30,6 +31,7 @@ const App: React.FC = () => {
                 <Route path="/profile" element={<UserProfile user={{username:'username',email:'email',avatarUrl:''}}/>}/>
                 <Route path="/dashboard" element={<UserDashboard/>}/>
                 <Route path="/user/form" element={<UserForm/>}/>
+		<Route path="/user/mform" element={<CompanyForm/>}/>
             </Routes>
         </Router>
     );
