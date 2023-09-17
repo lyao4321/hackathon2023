@@ -13,6 +13,7 @@ import CompanyRegisterFull from './containers/CompanyRegister';
 import AboutUs from './containers/AboutUs';
 import UserDashboard from './containers/Dashboard';
 import UserForm from './containers/UserForm';
+import UserProfile from './containers/UserProfile';
 
 
 const App: React.FC = () => {
@@ -26,12 +27,13 @@ const App: React.FC = () => {
                 <Route path="/register" element={<MenteeRegisterFull />} />
                 <Route path="/" element={<Navigate to="/aboutus" />} />
                 <Route path="/aboutus" element={<AboutUs/>}/>
-
+                <Route path="/profile" element={<UserProfile user={{username:'username',email:'email',avatarUrl:''}}/>}/>
                 <Route path="/dashboard" element={<UserDashboard/>}/>
                 <Route path="/user/form" element={<UserForm/>}/>
             </Routes>
         </Router>
     );
 }
+
 
 export default App;
