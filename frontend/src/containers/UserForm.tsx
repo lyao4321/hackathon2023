@@ -30,7 +30,7 @@ function UserForm(): React.ReactElement {
         // Send the data to your API, handle response/errors accordingly
         try {
             const token = sessionStorage.getItem('token');
-            const response = await fetch('http://localhost:8080/api/form', {
+            const response = await fetch('/api/form', {
                 method: 'POST',
                 credentials: 'include',
                 headers: new Headers({
@@ -47,7 +47,6 @@ function UserForm(): React.ReactElement {
                     university: university,
                     hours: hours,
                     skills: skills
-                    
                 })
             });
             const data = await response.json();
@@ -146,6 +145,7 @@ function UserForm(): React.ReactElement {
                         
                         {/* ... Add other TextField components similarly for each input field */}
                         <Button
+                            onClick={handleSubmit}
                             type="submit"
                             fullWidth
                             variant="contained"
