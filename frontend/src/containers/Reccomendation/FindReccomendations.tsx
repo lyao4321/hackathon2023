@@ -1,11 +1,12 @@
-import {useState} from 'react';
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import NavBar from "../Navbar";
-import ProfileCarousel from './Carousel'
-import { useNavigate } from 'react-router-dom';
+import ProfileCarousel from "./Carousel";
+import { Stack } from "@mui/material";
+// import { useNavigate } from "react-router-dom";
 
 interface Profile {
   name: string;
@@ -14,43 +15,54 @@ interface Profile {
 }
 
 function Reccomendations() {
-  const [profiles, setProfiles] = useState<Profile[]>([]);
-  const navigate = useNavigate();
+  const [profiles, setProfiles] = useState<Profile[]>([
+    {
+      name: "John Doe",
+      headline: "Software Engineer",
+      imageUrl: "/assets/male.jpg",
+    },
+    {
+      name: "Jane Smith",
+      headline: "Product Manager",
+      imageUrl: "/assets/female.jpg",
+    },
+  ]);
+  // const navigate = useNavigate();
 
-  const pageRoutes = {
-    'login':'/login',
-  };  
+  // const pageRoutes = {
+  //   login: "/login",
+  // };
 
-  const navigateSite = (page: string) => {
-    type PageKey = keyof typeof pageRoutes;
-    const route = pageRoutes[page as PageKey];
-    if (route) {
-      navigate(route);
-    }
-  };
+  // const navigateSite = (page: string) => {
+  //   type PageKey = keyof typeof pageRoutes;
+  //   const route = pageRoutes[page as PageKey];
+  //   if (route) {
+  //     navigate(route);
+  //   }
+  // };
 
-  const RerunReccomendations = (userData:any) => {
+  const RerunReccomendations = (userData: any) => {
     const profiles = [
       {
-        name: 'John Doe',
-        headline: 'Software Engineer',
-        imageUrl: 'male.jpg',
+        name: "John Doe",
+        headline: "Software Engineer",
+        imageUrl: "/assets/male.jpg",
       },
       {
-        name: 'Jane Smith',
-        headline: 'Product Manager',
-        imageUrl: 'female.jpg',
+        name: "Jane Smith",
+        headline: "Product Manager",
+        imageUrl: "/assets/female.jpg",
       },
     ];
-    setProfiles(profiles) 
-  } 
-  
-  const user = {'user':'username'};
+    setProfiles(profiles);
+  };
+
+  const user = { user: "username" };
   return (
-  <>
+    <>
       <NavBar />
       <CssBaseline />
-      <Container maxWidth="sm">
+      <Container maxWidth="lg">
         <Typography
           component="h1"
           variant="h2"
@@ -58,7 +70,7 @@ function Reccomendations() {
           color="text.primary"
           gutterBottom
         >
-          Get some mentor reccomendations here
+          We found a few matches for you
         </Typography>
         <Typography
           variant="h5"
@@ -66,15 +78,27 @@ function Reccomendations() {
           color="text.secondary"
           paragraph
         >
-          We use our propriotary algorithm to bring personalized reccomendations
-          to you.
+          Connect to these prople and nring them in your network to succeed!
         </Typography>
-        <Button onClick={() => RerunReccomendations(user)} variant="contained">
-          Get Reccomendations!
-        </Button>
-      <ProfileCarousel profiles={profiles}/>
+        <Stack
+          sx={{ pt: 4 }}
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+        >
+          <Button
+            onClick={() => RerunReccomendations(user)}
+            variant="contained"
+          >
+            Get Reccomendations!
+          </Button>
+        </Stack>
+        <br/>
+        <br/>
+        <br/>
+        <ProfileCarousel profiles={profiles} />
       </Container>
     </>
   );
 }
-export {Reccomendations};
+export { Reccomendations };
