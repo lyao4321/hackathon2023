@@ -20,7 +20,7 @@ const mainNavigationRoutes = {
 };
 
 const secondaryNavigationRoutes = {
-  'Log Out': { path: '/logout', icon: <AssignmentIcon /> } // Note: This might not be a route, but rather a function to log the user out.
+  'Log Out': { path: '/aboutus', icon: <AssignmentIcon /> } // Change logout path to /aboutus
 };
 
 export function MainListItems() {
@@ -43,13 +43,24 @@ export function MainListItems() {
 export function SecondaryListItems() {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    // Delete the user session
+    sessionStorage.removeItem('token'); // assuming token is stored in session storage
+
+    // Redirect to about us page
+    navigate('/aboutus');
+  }
+
   return (
     <React.Fragment>
       <ListSubheader component="div" inset>
         Quick Access
       </ListSubheader>
       {Object.entries(secondaryNavigationRoutes).map(([key, { path, icon }]) => (
-        <ListItemButton key={key} onClick={() => navigate(path)}>
+        <ListItemButton 
+          key={key} 
+          onClick={key === 'Log Out' ? handleLogout : () => navigate(path)}
+        >
           <ListItemIcon>
             {icon}
           </ListItemIcon>

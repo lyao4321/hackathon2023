@@ -87,9 +87,26 @@ const defaultTheme = createTheme();
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
+  const [username, setUsername] = React.useState<string | null>(null); 
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  React.useEffect(() => {
+    const getTokenPayload = (token: string) => {
+      const payload = token.split('.')[1];
+      const decodedPayload = atob(payload);
+      return JSON.parse(decodedPayload);
+    };
+  
+    const storedToken = sessionStorage.getItem('token');
+    if (storedToken) {
+      const payload = getTokenPayload(storedToken);
+      setUsername(payload.username);
+    }
+  }, []);
+  
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -120,7 +137,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {username ? `${username}'s Dashboard` : 'Dashboard'}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
