@@ -11,13 +11,21 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
-const mainNavigationRoutes = {
+const seekerNavigationRoutes = {
   'Dashboard': { path: '/', icon: <DashboardIcon /> },
   'Applications': { path: '/applications', icon: <PaperIcon /> },
   'Mentors': { path: '/mentors', icon: <PeopleIcon /> },
   'Profile': { path: '/profile', icon: <BarChartIcon /> },
   'Settings': { path: '/settings', icon: <LayersIcon /> },
 };
+
+const companyNavigationRoutes = {
+  'Dashboard': { path: '/company/dahsboard', icon: <DashboardIcon /> },
+  'Applications': { path: '/applications', icon: <PaperIcon /> },
+  'Mentors': { path: '/mentors', icon: <PeopleIcon /> },
+  'Profile': { path: '/profile', icon: <BarChartIcon /> },
+  'Settings': { path: '/settings', icon: <LayersIcon /> },
+}
 
 const secondaryNavigationRoutes = {
   'Log Out': { path: '/aboutus', icon: <AssignmentIcon /> } // Change logout path to /aboutus
@@ -28,7 +36,7 @@ export function MainListItems() {
 
   return (
     <React.Fragment>
-      {Object.entries(mainNavigationRoutes).map(([key, { path, icon }]) => (
+      {Object.entries(seekerNavigationRoutes).map(([key, { path, icon }]) => (
         <ListItemButton key={key} onClick={() => navigate(path)}>
           <ListItemIcon>
             {icon}
