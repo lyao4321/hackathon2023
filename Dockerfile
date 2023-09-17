@@ -31,5 +31,5 @@ ENV FLASK_RUN_PORT=8080
 
 EXPOSE 8080
 
-CMD ["python", "-m", "flask", "run"]
+CMD ["python", "-u", "-m", "flask", "run"]
 
