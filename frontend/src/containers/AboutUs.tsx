@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
@@ -6,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import NavBar from './Navbar';
+
 
 
 function Copyright() {
@@ -24,6 +27,21 @@ function Copyright() {
 
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
+  const pageRoutes = {
+    'Get Started': '/company/register',
+  };  
+
+  const navigateSite = (page: string) => {
+    type PageKey = keyof typeof pageRoutes;
+    const route = pageRoutes[page as PageKey];
+    if (route) {
+      navigate(route);
+    }
+  };
+
+
   return (
     <>
     <NavBar/>
@@ -57,7 +75,7 @@ export default function Dashboard() {
                 spacing={2}
                 justifyContent="center"
                 >
-                <Button variant="contained">Get Started</Button>
+                <Button onClick={() => navigateSite('Get Started')} variant="contained">Get Started</Button>
                 <Button variant="outlined">See Available Jobs</Button>
                 </Stack>
             </Container>
