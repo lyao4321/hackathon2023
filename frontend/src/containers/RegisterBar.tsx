@@ -30,7 +30,7 @@ function RegisterBar({ isCompany }: RegisterBarProps) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  
+
   const pageRoutes = {
     'Mentor Sign up': '/company/register',
     'Mentee Sign Up': '/register',
@@ -62,7 +62,7 @@ function RegisterBar({ isCompany }: RegisterBarProps) {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            >gi
+            >
               <MenuIcon />
             </IconButton>
             <Menu

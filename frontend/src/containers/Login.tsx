@@ -9,6 +9,7 @@ import {
     CssBaseline,
 } from '@mui/material';
 import '../styles/login.css';
+import LoginBar from './LoginBar';
 
 function Login(): React.ReactElement {
     const [credential, setCredential] = useState<string>('');
@@ -58,6 +59,8 @@ function Login(): React.ReactElement {
     };
 
     return (
+        <>
+        <LoginBar isCompany={false}/>
         <Container component="main" maxWidth="lg">
         <div className="grid-container">
 
@@ -117,6 +120,9 @@ function Login(): React.ReactElement {
 
         </div>
         </Container>
+        </>
+
+        
     );
 }
 
