@@ -9,11 +9,16 @@ import {
     Link,
 } from '@mui/material';
 import RegisterBar from '../RegisterBar';
+import '../../styles/register.css';
 
 function Register(): React.ReactElement {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
+
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -22,6 +27,15 @@ function Register(): React.ReactElement {
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
     };
+
+    const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFirstName(event.target.value);
+    };
+
+    const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLastName(event.target.value);
+    };
+
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
@@ -43,7 +57,7 @@ function Register(): React.ReactElement {
 	    setError(true);
             return;
 	}
-	console.log('Email:', email);
+	    console.log('Email:', email);
         console.log('Password:', password);
 
         try {
@@ -83,6 +97,7 @@ function Register(): React.ReactElement {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div>
+                <br/>
                 <Typography component="h1" variant="h5">
                     Job Seeker Register
                 </Typography>
@@ -100,6 +115,34 @@ function Register(): React.ReactElement {
                         value={username}
                         onChange={handleUsernameChange}
                     />
+                    <div className='grid'>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="firstname"
+                            label="First Name"
+                            name="firstname"
+                            autoComplete="firstname"
+                            autoFocus
+                            value={firstName}
+                            onChange={handleFirstNameChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="lastname"
+                            label="Last Name"
+                            name="lastname"
+                            autoComplete="lastname"
+                            autoFocus
+                            value={lastName}
+                            onChange={handleLastNameChange}
+                        />
+                    </div>
                     <TextField
                         variant="outlined"
                         margin="normal"

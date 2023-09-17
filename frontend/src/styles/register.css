@@ -1,0 +1,7 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: auto;  /* Adjusting height to auto so it only takes the required space */
+    padding: 0px 0px 0px; /* Padding top, left/right, and bottom */
+}
