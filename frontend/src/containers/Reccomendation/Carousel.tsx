@@ -6,18 +6,16 @@ import {
   Button,
 } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-
+import './mycarousel.css';
 
 const ProfileCarousel = (props:any) => {
   const [currentProfile, setCurrentProfile] = useState(0);
-  const {profiles} = props
-
   const prevProfile = () => {
-    setCurrentProfile((prev) => (prev === 0 ? profiles.length - 1 : prev - 1));
+    setCurrentProfile((prev) => (prev === 0 ? props.profiles.length - 1 : prev - 1));
   };
 
   const nextProfile = () => {
-    setCurrentProfile((prev) => (prev === profiles.length - 1 ? 0 : prev + 1));
+    setCurrentProfile((prev) => (prev === props.profiles.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -28,13 +26,13 @@ const ProfileCarousel = (props:any) => {
       <Card>
         <CardContent>
           <img
-            src={profiles[currentProfile].imageUrl}
-            alt={profiles[currentProfile].name}
+            src={props.profiles[currentProfile].imageUrl}
+            alt={props.profiles[currentProfile].name}
             className="profile-image"
           />
-          <Typography variant="h5">{profiles[currentProfile].name}</Typography>
+          <Typography variant="h5">{props.profiles[currentProfile].name}</Typography>
           <Typography variant="subtitle1">
-            {profiles[currentProfile].headline}
+            {props.profiles[currentProfile].headline}  &nbsp;&nbsp;&nbsp; <Button>Learn more</Button>
           </Typography>
         </CardContent>
       </Card>
