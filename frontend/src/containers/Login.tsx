@@ -45,7 +45,7 @@ function Login(): React.ReactElement {
                 sessionStorage.setItem('token', data.token);
         
                 // Redirect using the new API
-                navigation('/');
+                navigation('/dashboard');
             }
             else {
                 // Handle any login errors here. You might want to set some state to display an error message to the user.

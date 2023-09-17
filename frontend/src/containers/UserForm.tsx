@@ -17,7 +17,6 @@ function UserForm(): React.ReactElement {
     const [industry, setIndustry] = useState<string>('');
     const [interests, setInterests] = useState<string>('');
     const [startupExperience, setStartupExperience] = useState<string>('');
-    const [mentor, setMentor] = useState<string>('');
     const [university, setUniversity] = useState<string>('');
     const [hours, setHours] = useState<number | null>(null);
     const [skills, setSkills] = useState<string>('');
