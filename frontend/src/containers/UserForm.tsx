@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import '../styles/userform.css';
 import NavBar from './Navbar';
+import { generateKey } from 'crypto';
 
 function UserForm(): React.ReactElement {
     const [age, setAge] = useState<number | null>(null);
@@ -27,6 +28,40 @@ function UserForm(): React.ReactElement {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         // Send the data to your API, handle response/errors accordingly
+        try {
+            const response = await fetch('http://localhost:8080/api/form', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    age: age,
+                    gender: gender,
+                    location: location,
+                    industry: industry,
+                    interests: interests,
+                    startupExperience: startupExperience,
+                    university: university,
+                    hours: hours,
+                    skills: skills
+                })
+            });
+            const data = await response.json();
+            if (response.status === 200 && data.token) {
+                // Redirect using the new API
+                navigation('/');
+            }
+            else {
+                // Handle any login errors here. You might want to set some state to display an error message to the user.
+                console.error(data.error);
+            }
+        }
+        catch (error) {
+            // Handle fetch errors here. E.g., network issues or invalid JSON responses.
+            console.error('Error fetching:', error);
+        }
+
     };
 
     return (

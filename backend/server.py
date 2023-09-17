@@ -14,7 +14,6 @@ CORS(app, resources={r'/*': {'origins': '*'}}, supports_credentials=True)
 @app.route('/api/login', methods=['GET','POST'])
 def login():
     data = request.get_json()
-    print(data)
     if not data or 'credential' not in data:
         return jsonify({'error': 'email is required'}), 400
     credential = data['credential']
@@ -47,11 +46,47 @@ def register():
         'username': username,
         'email': email,
         'password': password,
+        'client': True,
+        'gender':'',
+        'age':'',
+        'location': '',
+        'interests': '',
+        'industry': '',
+        'experience': '',
+        'university': '',
+        'hours': '',
+        'skills': '',
     }
-
     db.client_users.insert_one(new_user)
     token = jwt.encode({'email': email}, app.config['SECRET_KEY'], algorithm='HS256')
     return jsonify({'token': token}), 200 
+    
+@app.route('/api/form', methods=['POST'])
+def form():
+    data = request.get_json()
+    print(data)
+    token = request.headers.get('Authorization')
+    print(token)
+    try:
+        decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'], verify=True)
+        current_user = db.client_users.find_one({
+            '$or': [
+                {'email': decoded['email']},
+                {'username': decoded['username']}
+            ]
+        })
+
+        print(current_user)
+        # Ensure only allowed fields are updated
+        allowed_fields = [
+            'gender', 'age', 'location', 'interests', 'industry', 'experience', 'university', 'hours', 'skills'
+        ]
+        update_data = {key: data[key] for key in allowed_fields if key in data}
+        db.client_users.update_one(current_user, {'$set': update_data})
+        return jsonify({'verified': True}), 200
+    except:
+        return jsonify({'verified': False}), 401
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
