@@ -8,7 +8,7 @@ import {
     CssBaseline,
 } from '@mui/material';
 import '../styles/userform.css';
-import NavBar from './Navbar';
+import NavBar from '../Navbar';
 import { generateKey } from 'crypto';
 
 function CompanyForm(): React.ReactElement {

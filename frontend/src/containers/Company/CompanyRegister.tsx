@@ -8,7 +8,7 @@ import {
     CssBaseline,
     Link,
 } from '@mui/material';
-import RegisterBar from './RegisterBar';
+import RegisterBar from '../RegisterBar';
 
 function CompanyRegister(): React.ReactElement {
 

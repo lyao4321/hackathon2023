@@ -7,7 +7,8 @@ import {
     Typography,
     CssBaseline,
 } from '@mui/material';
-import '../styles/companyLogin.css';
+import '../../styles/companyLogin.css';
+import LoginBar from '../LoginBar';
 
 
 function CompanyLogin(): React.ReactElement {
@@ -31,6 +32,8 @@ function CompanyLogin(): React.ReactElement {
     };
 
     return (
+        <>
+        <LoginBar isCompany={true}/>
         <Container component="main" maxWidth="lg">
         
         <div className='grid-container'>
@@ -88,6 +91,8 @@ function CompanyLogin(): React.ReactElement {
 
         </div>
         </Container>
+        </>
+        
     );
 }
 

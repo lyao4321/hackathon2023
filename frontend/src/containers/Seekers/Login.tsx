@@ -8,8 +8,8 @@ import {
     Typography,
     CssBaseline,
 } from '@mui/material';
-import '../styles/login.css';
-import LoginBar from './LoginBar';
+import '../../styles/login.css';
+import LoginBar from '../LoginBar';
 
 function Login(): React.ReactElement {
     const [credential, setCredential] = useState<string>('');
