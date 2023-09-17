@@ -14,11 +14,7 @@ import AboutUs from './containers/AboutUs';
 import UserDashboard from './containers/Dashboard';
 import UserForm from './containers/UserForm';
 import UserProfile from './containers/UserProfile';
-<<<<<<< HEAD
 import { Reccomendations } from './containers/Reccomendation/FindReccomendations';
-=======
-import CompanyForm from './containers/CompanyForm';
->>>>>>> 11ccb85ec54b6f69630cef74dab1c81fd5f6df15
 
 
 const App: React.FC = () => {

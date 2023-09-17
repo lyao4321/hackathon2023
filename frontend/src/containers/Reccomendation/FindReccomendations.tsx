@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import NavBar from "../Navbar";
 import ProfileCarousel from './Carousel'
+import { useNavigate } from 'react-router-dom';
 
 interface Profile {
   name: string;
@@ -13,7 +14,20 @@ interface Profile {
 }
 
 function Reccomendations() {
-  const [profiles, setProfiles] = useState<Profile[]>([])
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const navigate = useNavigate();
+
+  const pageRoutes = {
+    'login':'/login',
+  };  
+
+  const navigateSite = (page: string) => {
+    type PageKey = keyof typeof pageRoutes;
+    const route = pageRoutes[page as PageKey];
+    if (route) {
+      navigate(route);
+    }
+  };
 
   const RerunReccomendations = (userData:any) => {
     const profiles = [
