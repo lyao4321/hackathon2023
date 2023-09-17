@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Button,
     Container,
@@ -10,10 +11,14 @@ import {
 import RegisterBar from './RegisterBar';
 
 function CompanyRegister(): React.ReactElement {
+
+    const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
     const [company, setCompany] =  useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [error , setError] = useState<boolean>(false);
+
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -32,18 +37,50 @@ function CompanyRegister(): React.ReactElement {
         setConfirmPassword(event.target.value);
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-
+	setError(false);
         if (password !== confirmPassword) {
             console.error("Passwords don't match!");
+	    setError(true);
             return;
         }
-
-        // Handle registration logic here
         console.log('Email:', email);
         console.log('Company:', company);
         console.log('Password:', password);
+
+	try {
+            const response = await fetch('http://localhost:8080/api/mregister', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    company: company,
+                    email: email,
+                    password: password
+                })
+            });
+            const data = await response.json();
+	    console.log(data);
+            if (response.status === 200) {
+                // Save the token as before
+                console.log(data);
+                sessionStorage.setItem('token', data.token);
+        
+                // Redirect using the new API
+                navigate('/');
+            }
+            else {
+                console.error(data.error);
+            }
+        } catch (error) {
+            // Handle fetch errors here. E.g., network issues or invalid JSON responses.
+            console.error('Error fetching:', error);
+	}
+	
+
     };
 
     return (
@@ -56,7 +93,7 @@ function CompanyRegister(): React.ReactElement {
                     Company Register
                 </Typography>
                 <form noValidate onSubmit={handleSubmit}>
-                    <TextField
+                <TextField
                         variant="outlined"
                         margin="normal"
                         required
@@ -109,12 +146,16 @@ function CompanyRegister(): React.ReactElement {
                         autoComplete="new-password"
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
+
                     />
+		    {error?<p style={{color:'red'}}>Passwords don't match!</p>:<p></p>}
+
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
+			onClick={handleSubmit}
                     >
                         Register
                     </Button>

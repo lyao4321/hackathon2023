@@ -19,6 +19,8 @@ company_users = db['company_users']
 
 def client_insert(data):
     client_users.insert_one(data)
+def company_inset(data):
+    company_users.insert_one(data)
 
 def get_client_either_email_or_username(credential):
     return client_users.find_one({
@@ -33,4 +35,3 @@ try:
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
-
