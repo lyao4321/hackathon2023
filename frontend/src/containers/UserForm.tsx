@@ -29,12 +29,14 @@ function UserForm(): React.ReactElement {
         event.preventDefault();
         // Send the data to your API, handle response/errors accordingly
         try {
+            const token = sessionStorage.getItem('token');
             const response = await fetch('http://localhost:8080/api/form', {
                 method: 'POST',
                 credentials: 'include',
-                headers: {
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + token,
                     'Content-Type': 'application/json'
-                },
+                }),
                 body: JSON.stringify({
                     age: age,
                     gender: gender,
@@ -45,10 +47,11 @@ function UserForm(): React.ReactElement {
                     university: university,
                     hours: hours,
                     skills: skills
+                    
                 })
             });
             const data = await response.json();
-            if (response.status === 200 && data.token) {
+            if (response.status === 200) {
                 // Redirect using the new API
                 navigation('/');
             }

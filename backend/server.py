@@ -54,7 +54,7 @@ def register():
         'industry': '',
         'experience': '',
         'university': '',
-        'hours': '',
+        'hours': 0,
         'skills': '',
     }
     db.client_users.insert_one(new_user)
@@ -64,26 +64,24 @@ def register():
 @app.route('/api/form', methods=['POST'])
 def form():
     data = request.get_json()
-    print(data)
     token = request.headers.get('Authorization')
-    print(token)
+    if token and token.startswith("Bearer "):
+        token = token.split(" ")[-1]
     try:
         decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'], verify=True)
-        current_user = db.client_users.find_one({
-            '$or': [
-                {'email': decoded['email']},
-                {'username': decoded['username']}
-            ]
-        })
-
-        print(current_user)
         # Ensure only allowed fields are updated
+        current_user = db.client_users.find_one({
+        '$or': [
+            {'email': decoded['username']},
+            {'username': decoded['username']}
+        ]
+    })
         allowed_fields = [
             'gender', 'age', 'location', 'interests', 'industry', 'experience', 'university', 'hours', 'skills'
         ]
         update_data = {key: data[key] for key in allowed_fields if key in data}
         db.client_users.update_one(current_user, {'$set': update_data})
-        return jsonify({'verified': True}), 200
+        return jsonify({'token': token}), 200
     except:
         return jsonify({'verified': False}), 401
     

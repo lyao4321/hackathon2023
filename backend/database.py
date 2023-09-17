@@ -20,6 +20,13 @@ company_users = db['company_users']
 def client_insert(data):
     client_users.insert_one(data)
 
+def get_client_either_email_or_username(credential):
+    return client_users.find_one({
+        credential
+    })
+
+
+
 
 try:
     client.admin.command('ping')
