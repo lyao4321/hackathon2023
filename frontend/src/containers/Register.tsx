@@ -67,7 +67,7 @@ function Register(): React.ReactElement {
                 sessionStorage.setItem('token', data.token);
         
                 // Redirect using the new API
-                navigate('/');
+                navigate('/dashboard');
             }
             else {
                 console.error(data.error);
