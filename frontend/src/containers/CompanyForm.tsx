@@ -11,18 +11,12 @@ import '../styles/userform.css';
 import NavBar from './Navbar';
 import { generateKey } from 'crypto';
 
-function UserForm(): React.ReactElement {
+function CompanyForm(): React.ReactElement {
     const [age, setAge] = useState<number | null>(null);
     const [gender, setGender] = useState<string>('');
     const [location, setLocation] = useState<string>('');
     const [industry, setIndustry] = useState<string>('');
-    const [interests, setInterests] = useState<string>('');
     const [startupExperience, setStartupExperience] = useState<string>('');
-    const [mentor, setMentor] = useState<string>('');
-    const [university, setUniversity] = useState<string>('');
-    const [hours, setHours] = useState<number | null>(null);
-    const [skills, setSkills] = useState<string>('');
-
     const navigation = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -30,7 +24,7 @@ function UserForm(): React.ReactElement {
         // Send the data to your API, handle response/errors accordingly
         try {
             const token = sessionStorage.getItem('token');
-            const response = await fetch('/api/form', {
+            const response = await fetch('http://localhost:8080/api/mform', {
                 method: 'POST',
                 credentials: 'include',
                 headers: new Headers({
@@ -42,11 +36,8 @@ function UserForm(): React.ReactElement {
                     gender: gender,
                     location: location,
                     industry: industry,
-                    interests: interests,
                     startupExperience: startupExperience,
-                    university: university,
-                    hours: hours,
-                    skills: skills
+                                        
                 })
             });
             const data = await response.json();
@@ -105,14 +96,7 @@ function UserForm(): React.ReactElement {
                             id="industry" 
                             label="Industry" 
                             value={industry} 
-                            onChange={(e) => setIndustry(e.target.value)} 
-                        />
-                        <TextField 
-                            variant="outlined" margin="normal" required fullWidth 
-                            id="interests" 
-                            label="Interests" 
-                            value={interests} 
-                            onChange={(e) => setInterests(e.target.value)} 
+                            onChange={(e) => setIndustry(e.target.value)}                             
                         />
                         <TextField 
                             variant="outlined" margin="normal" required fullWidth 
@@ -121,31 +105,9 @@ function UserForm(): React.ReactElement {
                             value={startupExperience} 
                             onChange={(e) => setStartupExperience(e.target.value)} 
                         />
-                        <TextField 
-                            variant="outlined" margin="normal" required fullWidth 
-                            id="university" 
-                            label="University" 
-                            value={university} 
-                            onChange={(e) => setUniversity(e.target.value)} 
-                        />
-                        <TextField 
-                            variant="outlined" margin="normal" required fullWidth 
-                            id="skills" 
-                            label="Skills" 
-                            value={skills} 
-                            onChange={(e) => setSkills(e.target.value)} 
-                        />
-                        <TextField 
-                            variant="outlined" margin="normal" required fullWidth 
-                            id="hours" 
-                            label="Hours available per week" 
-                            value={hours} 
-                            onChange={(e) => setHours(Number(e.target.value))} 
-                        />
                         
                         {/* ... Add other TextField components similarly for each input field */}
                         <Button
-                            onClick={handleSubmit}
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -166,4 +128,4 @@ function UserForm(): React.ReactElement {
     );
 }
 
-export default UserForm;
+export default CompanyForm;
