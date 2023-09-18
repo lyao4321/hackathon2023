@@ -10,7 +10,8 @@ import {
 import '../../styles/userform.css';
 import NavBar from '../Navbar';
 import { generateKey } from 'crypto';
-import Autocomplete from '@mui/lab/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 
 function UserForm(): React.ReactElement {
