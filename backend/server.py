@@ -126,6 +126,7 @@ def register():
         'university': '',
         'hours': 0,
         'skills': '',
+        'received_connects': []
     }
     db.client_users.insert_one(new_user)
     token = jwt.encode({'username': username}, app.config['SECRET_KEY'], algorithm='HS256')
