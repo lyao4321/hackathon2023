@@ -11,7 +11,6 @@ WORKDIR /frontend
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 COPY frontend/ ./
-RUN npm run build
 
 # Final image combining both
 FROM python:3.8-slim-buster
@@ -19,7 +18,7 @@ FROM python:3.8-slim-buster
 # Copy Flask application and React build
 WORKDIR /backend
 COPY --from=backend /backend /backend
-COPY --from=frontend-build /frontend/build /frontend
+COPY --from=frontend-build /frontend /frontend
 COPY ./backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
