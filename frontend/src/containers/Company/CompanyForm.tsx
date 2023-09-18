@@ -7,16 +7,15 @@ import {
     Typography,
     CssBaseline,
 } from '@mui/material';
-import '../styles/userform.css';
+import '../../styles/userform.css';
 import NavBar from '../Navbar';
 import { generateKey } from 'crypto';
 
 function CompanyForm(): React.ReactElement {
-    const [age, setAge] = useState<number | null>(null);
-    const [gender, setGender] = useState<string>('');
     const [location, setLocation] = useState<string>('');
     const [industry, setIndustry] = useState<string>('');
     const [startupExperience, setStartupExperience] = useState<string>('');
+    const [skills, setSkills] = useState<string>('');
     const navigation = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -32,12 +31,10 @@ function CompanyForm(): React.ReactElement {
                     'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify({
-                    age: age,
-                    gender: gender,
                     location: location,
                     industry: industry,
                     startupExperience: startupExperience,
-                                        
+                    skills: skills
                 })
             });
             const data = await response.json();
@@ -71,21 +68,6 @@ function CompanyForm(): React.ReactElement {
                     <form noValidate onSubmit={handleSubmit}>
                         <TextField 
                             variant="outlined" margin="normal" required fullWidth 
-                            type="number"
-                            id="age" 
-                            label="Age" 
-                            value={age || ''} 
-                            onChange={(e) => setAge(Number(e.target.value))} 
-                        />
-                        <TextField 
-                            variant="outlined" margin="normal" required fullWidth 
-                            id="gender" 
-                            label="Gender" 
-                            value={gender} 
-                            onChange={(e) => setGender(e.target.value)} 
-                        />
-                        <TextField 
-                            variant="outlined" margin="normal" required fullWidth 
                             id="location" 
                             label="Location" 
                             value={location} 
@@ -98,12 +80,21 @@ function CompanyForm(): React.ReactElement {
                             value={industry} 
                             onChange={(e) => setIndustry(e.target.value)}                             
                         />
+
                         <TextField 
                             variant="outlined" margin="normal" required fullWidth 
+                            type="number"
                             id="experience" 
                             label="Years of Experience" 
                             value={startupExperience} 
                             onChange={(e) => setStartupExperience(e.target.value)} 
+                        />
+                        <TextField 
+                            variant="outlined" margin="normal" required fullWidth 
+                            id="skills" 
+                            label="Skills" 
+                            value={skills} 
+                            onChange={(e) => setSkills(e.target.value)} 
                         />
                         
                         {/* ... Add other TextField components similarly for each input field */}

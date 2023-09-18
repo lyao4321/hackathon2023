@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import AdbIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
@@ -53,7 +53,7 @@ function ResponsiveAppBar() {
 
   const pageRoutes = {
     'login':'/login',
-    'Profile': '/',
+    'Profile': '/profile',
     'Dashboard': '/dashboard',
     'Logout': '/'
   };  
@@ -95,7 +95,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            BOARD
+            LOCAL
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

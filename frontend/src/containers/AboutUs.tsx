@@ -16,7 +16,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://startup.com/">
-        StartUp
+        Local
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -64,10 +64,10 @@ export default function Dashboard() {
                 color="text.primary"
                 gutterBottom
                 >
-                Welcome to StartUp
+                Welcome to Local
                 </Typography>
                 <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                StartUp is a proprietary job-matching platform designed to optimize and streamline the hiring process. The core functionality lies in its sophisticated recommendation system, which intelligently pairs recruiters with potential candidates based on specific areas of expertise.
+                Local is a proprietary job-matching platform designed to optimize and streamline the hiring process. The core functionality lies in its sophisticated recommendation system, which intelligently pairs recruiters with potential candidates based on specific areas of expertise.
                 </Typography>
                 <Stack
                 sx={{ pt: 4 }}

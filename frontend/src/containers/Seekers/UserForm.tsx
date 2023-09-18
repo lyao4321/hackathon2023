@@ -10,6 +10,8 @@ import {
 import '../../styles/userform.css';
 import NavBar from '../Navbar';
 import { generateKey } from 'crypto';
+import Autocomplete from '@mui/lab/Autocomplete';
+
 
 function UserForm(): React.ReactElement {
     const [age, setAge] = useState<number | null>(null);
@@ -24,6 +26,7 @@ function UserForm(): React.ReactElement {
     const [skills, setSkills] = useState<string>('');
 
     const navigation = useNavigate();
+    const industries: string[] = ['Tech', 'Finance', 'Health', /* ... other industries */];
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -100,12 +103,22 @@ function UserForm(): React.ReactElement {
                             value={location} 
                             onChange={(e) => setLocation(e.target.value)} 
                         />
-                        <TextField 
-                            variant="outlined" margin="normal" required fullWidth 
-                            id="industry" 
-                            label="Industry" 
-                            value={industry} 
-                            onChange={(e) => setIndustry(e.target.value)} 
+                        <Autocomplete
+                            id="industry"
+                            options={industries}
+                            getOptionLabel={(option: string) => option}
+                            value={industry}
+                            onChange={(_, newValue: string | null) => setIndustry(newValue || '')}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    label="Industry"
+                                />
+                            )}
                         />
                         <TextField 
                             variant="outlined" margin="normal" required fullWidth 

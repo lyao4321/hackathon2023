@@ -70,7 +70,7 @@ function CompanyRegister(): React.ReactElement {
                 sessionStorage.setItem('token', data.token);
         
                 // Redirect using the new API
-                navigate('/');
+                navigate('/dashboard');
             }
             else {
                 console.error(data.error);
@@ -88,6 +88,7 @@ function CompanyRegister(): React.ReactElement {
         <RegisterBar isCompany={true} />
         <Container component="main" maxWidth="xs">
             <CssBaseline />
+            <br/>
             <div>
                 <Typography component="h1" variant="h5">
                     Company Register
