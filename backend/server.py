@@ -107,13 +107,14 @@ def register():
         'age':'',
         'location': '',
         'industry': '',
+        'interests':'',
         'experience': '',
         'university': '',
         'hours': 0,
         'skills': '',
     }
     db.client_users.insert_one(new_user)
-    token = jwt.encode({'email': email}, app.config['SECRET_KEY'], algorithm='HS256')
+    token = jwt.encode({'username': username}, app.config['SECRET_KEY'], algorithm='HS256')
     return jsonify({'token': token}), 200 
 
 @app.route('/api/mform', methods=['POST'])
@@ -195,7 +196,9 @@ def userprofile():
             {'email': decoded['username']},
             {'username': decoded['username']}
         ]
-    })
+    }
+                                  )
+        print(current_user)
         profile_details = {
             "age": current_user['age'],
             "gender": current_user['gender'],
@@ -207,6 +210,7 @@ def userprofile():
             "hours": current_user['hours'],
             "skills": current_user['skills']
         }
+        print(profile_details)
         return jsonify({'username': current_user['username'],
                         'email': current_user['email'],
                         'avatar': 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
@@ -224,7 +228,7 @@ def edituserprofile():
     else:
         return jsonify({'error': 'token is missing'}), 400
     try:
-        print(token)
+        
         decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
         current_user = db.client_users.find_one({
         '$or': [

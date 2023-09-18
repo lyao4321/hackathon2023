@@ -112,9 +112,9 @@ const UserProfile: React.FC<UserProfileProps> = ({}) => {
                         Edit Profile
                     </Button>
                 </Grid>
-                {[
-                    ['Gender', user.profile.gender],
+                {[	
                     ['Age', user.profile.age],
+		    ['Gender', user.profile.gender],
                     ['Location', user.profile.location],
                     ['Industry', user.profile.industry],
                     ['Interests', user.profile.interests],
