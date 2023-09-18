@@ -174,7 +174,7 @@ function CompanyRegister(): React.ReactElement {
                 sessionStorage.setItem('token', data.token);
         
                 // Redirect using the new API
-                navigate('/dashboard');
+                navigate('/company/form');
             }
             else {
                 console.error(data.error);

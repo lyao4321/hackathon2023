@@ -40,7 +40,7 @@ function CompanyForm(): React.ReactElement {
             const data = await response.json();
             if (response.status === 200) {
                 // Redirect using the new API
-                navigation('/');
+                navigation('/company/dashboard');
             }
             else {
                 // Handle any login errors here. You might want to set some state to display an error message to the user.

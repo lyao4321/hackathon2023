@@ -171,7 +171,7 @@ def form():
         ]
     })
         allowed_fields = [
-            'gender', 'age', 'location', 'interests', 'industry', 'experience', 'university', 'hours', 'skills'
+             'gender', 'age','location', 'industry', 'interests', 'experience', 'university', 'hours', 'skills'
         ]
         update_data = {key: data[key] for key in allowed_fields if key in data}
         db.client_users.update_one(current_user, {'$set': update_data})

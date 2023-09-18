@@ -81,7 +81,7 @@ function Register(): React.ReactElement {
                 sessionStorage.setItem('token', data.token);
         
                 // Redirect using the new API
-                navigate('/dashboard');
+                navigate('/user/form');
             }
             else {
                 console.error(data.error);

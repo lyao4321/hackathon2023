@@ -11,6 +11,7 @@ import '../../styles/userform.css';
 import NavBar from '../Navbar';
 import { generateKey } from 'crypto';
 import Autocomplete from '@mui/material/Autocomplete';
+import { start } from 'repl';
 
 
 
@@ -34,7 +35,7 @@ function UserForm(): React.ReactElement {
         // Send the data to your API, handle response/errors accordingly
         try {
             const token = sessionStorage.getItem('token');
-            const response = await fetch('/api/form', {
+            const response = await fetch('http://localhost:8080/api/form', {
                 method: 'POST',
                 credentials: 'include',
                 headers: new Headers({
@@ -42,8 +43,8 @@ function UserForm(): React.ReactElement {
                     'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify({
-                    age: age,
                     gender: gender,
+                    age: age,
                     location: location,
                     industry: industry,
                     interests: interests,
@@ -53,10 +54,11 @@ function UserForm(): React.ReactElement {
                     skills: skills
                 })
             });
+            console.log(age, gender, location, industry, interests, startupExperience, university, skills, hours);
             const data = await response.json();
             if (response.status === 200) {
                 // Redirect using the new API
-                navigation('/');
+                navigation('/dashboard');
             }
             else {
                 // Handle any login errors here. You might want to set some state to display an error message to the user.
