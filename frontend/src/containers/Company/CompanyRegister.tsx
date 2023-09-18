@@ -44,6 +44,9 @@ function CompanyRegister(): React.ReactElement {
                     console.error('Failed to fetch companies');
                     return;
                 }
+                else {
+                    console.error('200 response')
+                }
                 const data = await response.json();
                 setCompanies(data);  // Assuming the API returns an array of strings
             } catch (error) {
