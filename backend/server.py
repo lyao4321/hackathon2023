@@ -280,12 +280,19 @@ def updateprofile():
         
 @app.route('/api/getCompanies', methods=['GET'])
 def getCompanies():
-    data = request.get_json()
     try:
         companies = db.companies_DB.find()
-        return jsonify({'sucess': 'sucess', 'payload' : companies}), 200
-    except:
-        return jsonify({'error': 'token is invalid'}), 400
+        companies_list = [{
+            "name": company['name'],
+            "industry": company['industry'],
+            "location": company['location'],
+            "description": company['description']
+        } for company in companies]
+
+        return jsonify({'success': 'success', 'data': companies_list}), 200
+    except Exception as e:
+        print(str(e))  # Log the exception for debugging
+        return jsonify({'error': 'An error occurred'}), 400
     
 @app.route('/api/addCompanies', methods=['POST'])
 def addCompanies():
@@ -302,7 +309,7 @@ def addCompanies():
         return jsonify({'error': 'token is invalid'}), 400
 
 @app.route('/api/getRecMentee', methods=['POST'])
-def getRec():
+def getRecMentee():
     data = request.get_json()
     token = request.headers.get('Authorization')
     if token and token.startswith("Bearer "):
@@ -339,7 +346,7 @@ def getRec():
         return jsonify({'verified': False}), 401
     
 @app.route('/api/getRecMentor', methods=['POST'])
-def getRec():
+def getRecMentor():
     data = request.get_json()
     token = request.headers.get('Authorization')
     if token and token.startswith("Bearer "):

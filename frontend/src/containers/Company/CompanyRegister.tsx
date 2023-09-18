@@ -39,7 +39,13 @@ function CompanyRegister(): React.ReactElement {
         // Function to fetch companies
         const fetchCompanies = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/getCompanies');
+                const response = await fetch('http://localhost:8080/api/getCompanies', {
+                    method:'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                console.log("response");
                 if (response.status !== 200) {
                     console.error('Failed to fetch companies');
                     return;
@@ -48,7 +54,8 @@ function CompanyRegister(): React.ReactElement {
                     console.error('200 response')
                 }
                 const data = await response.json();
-                setCompanies(data);  // Assuming the API returns an array of strings
+                console.log(data.data);
+                setCompanies(data.data);  // Assuming the API returns an array of strings
             } catch (error) {
                 console.error('Error fetching companies:', error);
             }
