@@ -38,13 +38,15 @@ def get_matches(params):
 
     for specs_index, recommended_target in recommendations.items():
         specs_name = params.specs.loc[specs_index, "user_id"]
-        target_names = [params.target.loc[target_index, "user_id"] for target_index in recommended_target]
-    return target_names
+        # target_names = [params.target.loc[target_index, "user_id"] for target_index in recommended_target]
+        target_data = [params.target.loc[target_index, ["user_id", "location", "industry", "experience"]] for target_index in recommended_target]
+
+    return target_data
 
 
 #data = pd.read_csv("users.csv")
 
 
-if __name__ == "__main__":
-    recommendations = get_matches(obj)
-    print(recommendations)  
+# if __name__ == "__main__":
+#     recommendations = get_matches(obj)
+#     print(recommendations)  

@@ -41,23 +41,39 @@ function Reccomendations() {
   //   }
   // };
 
-  const RerunReccomendations = (userData: any) => {
-    const profiles = [
-      {
-        name: "John Doe",
-        headline: "Software Engineer",
-        imageUrl: "/assets/male.jpg",
-      },
-      {
-        name: "Jane Smith",
-        headline: "Product Manager",
-        imageUrl: "/assets/female.jpg",
-      },
-    ];
-    setProfiles(profiles);
-  };
+  const RerunReccomendations = async () => {
+    const storedToken = sessionStorage.getItem('token');
+      try {
+        const response = await fetch('http://localhost:8080/api/getRecMentee', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+              'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+              'Content-Type': 'application/json',
+          },
+            body: JSON.stringify({})
+        });
+  
+        const responseData = await response.json();
+        
+        if (response.status === 200) {
+            console.log(responseData);
+            // {
+            //   name: "John Doe",
+            //   industry: "Software Engineer",
+            //   gender:'Male',
+            //   location:'Buffalo',
+            //   imageUrl: "/assets/male.jpg",
+            // },
+          // setProfiles(profiles);
+        } else {
+            console.error(responseData.error);
+        }
+    } catch (error) {
+        console.error('Error while adding company:', error);
+    }
+    };
 
-  const user = { user: "username" };
   return (
     <>
       <NavBar />
@@ -87,7 +103,7 @@ function Reccomendations() {
           justifyContent="center"
         >
           <Button
-            onClick={() => RerunReccomendations(user)}
+            onClick={() => RerunReccomendations()}
             variant="contained"
           >
             Get Reccomendations!

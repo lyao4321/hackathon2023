@@ -342,7 +342,8 @@ def getRecMentee():
         obj.num_recommendations = 5
         rec = get_matches(obj)
         return jsonify({'rec': rec}), 200
-    except:
+    except Exception as e:
+        print(str(e))
         return jsonify({'verified': False}), 401
     
 @app.route('/api/getRecMentor', methods=['POST'])
