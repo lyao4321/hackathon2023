@@ -165,7 +165,7 @@ export default function Dashboard() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <MainListItems />
+            <MainListItems isCompany={false}/>
             <Divider sx={{ my: 1 }} />
             <SecondaryListItems />
           </List>

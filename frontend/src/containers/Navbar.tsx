@@ -55,7 +55,7 @@ function ResponsiveAppBar() {
     'login':'/login',
     'Profile': '/profile',
     'Dashboard': '/dashboard',
-    'Logout': '/'
+    'Logout': '/'    
   };  
 
   const navigateSite = (page: string) => {

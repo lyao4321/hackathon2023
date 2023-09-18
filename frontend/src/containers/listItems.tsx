@@ -11,6 +11,10 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
+interface dashboardProps {
+	isCompany: boolean;
+};
+
 const seekerNavigationRoutes = {
   'Menu': { path: '/', icon: <DashboardIcon /> },
   'Applications': { path: '/applications', icon: <PaperIcon /> },
@@ -20,19 +24,23 @@ const seekerNavigationRoutes = {
 };
 
 const companyNavigationRoutes = {
-  'Dashboard': { path: '/company/dashboard', icon: <DashboardIcon /> }
+  'Dashboard': { path: '/company/dashboard', icon: <DashboardIcon /> },
+  'Recommendations': { path: '/users/reccomendations', icon: <PaperIcon /> },
+  'Proximity Matching': { path: '/users/map', icon: <PaperIcon />}
 }
 
 const secondaryNavigationRoutes = {
   'Log Out': { path: '/aboutus', icon: <AssignmentIcon /> } // Change logout path to /aboutus
 };
 
-export function MainListItems() {
+export function MainListItems({isCompany}:dashboardProps)  {
   const navigate = useNavigate();
+
+  const navigationRoutes = isCompany ? companyNavigationRoutes : seekerNavigationRoutes;
 
   return (
     <React.Fragment>
-      {Object.entries(seekerNavigationRoutes).map(([key, { path, icon }]) => (
+      {Object.entries(navigationRoutes).map(([key, { path, icon }]) => (
         <ListItemButton key={key} onClick={() => navigate(path)}>
           <ListItemIcon>
             {icon}
