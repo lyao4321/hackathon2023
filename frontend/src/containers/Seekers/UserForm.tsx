@@ -51,7 +51,8 @@ function UserForm(): React.ReactElement {
                     startupExperience: startupExperience,
                     university: university,
                     hours: hours,
-                    skills: skills
+                    skills: skills,
+                    received_connects: []
                 })
             });
             console.log(age, gender, location, industry, interests, startupExperience, university, skills, hours);

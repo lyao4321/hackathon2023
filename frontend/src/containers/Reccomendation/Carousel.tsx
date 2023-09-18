@@ -28,7 +28,7 @@ const ProfileCarousel = (props:any) => {
           <img
             src={props.profiles[currentProfile].imageUrl}
             alt={props.profiles[currentProfile].name}
-            className="profile-image"
+            
           />
           <Typography variant="h5">{props.profiles[currentProfile].name}</Typography>
           <Typography variant="subtitle1">
