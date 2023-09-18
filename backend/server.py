@@ -164,6 +164,22 @@ def form():
     except:
         return jsonify({'verified': False}), 401
     
+@app.route('/api/recomendations', methods=['POST'])
+def getMatches():
+    data = request.json()
+    token = request.headers.get('Authorization').split(' ')[-1]
+    try:
+        decode = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'], verify=True)
+        current_user = db.client_users.find_one({
+        '$or': [
+            {'username': decoded['username']}
+        ]
+    })
+        print(current_user)
+        return jsonify({'token': token}), 200
+    except:
+        return jsonify({'verified': False}), 401
 
+        
 if __name__ == '__main__':
     app.run(debug=True)
