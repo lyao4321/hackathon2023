@@ -9,6 +9,7 @@ import {
     Link,
 } from '@mui/material';
 import RegisterBar from '../RegisterBar';
+import Autocomplete from '@mui/material/Autocomplete';
 
 function CompanyRegister(): React.ReactElement {
 
@@ -18,6 +19,8 @@ function CompanyRegister(): React.ReactElement {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [error , setError] = useState<boolean>(false);
+    
+    const companies: any[] = ['google'];
 
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,18 +111,22 @@ function CompanyRegister(): React.ReactElement {
                         onChange={handleEmailChange}
                     />
 
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="company"
-                        label="Company"
-                        name="company"
-                        autoComplete="company"
-                        autoFocus
+                    <Autocomplete
+                        id="companies"
+                        options={companies}
+                        getOptionLabel={(option: string) => option}
                         value={company}
-                        onChange={handleCompanyChange}
+                        onChange={(_, newValue: string | null) => setCompany(newValue || '')}
+                        renderInput={(params: any) => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                label="Company"
+                            />
+                        )}
                     />
 
                     <TextField
