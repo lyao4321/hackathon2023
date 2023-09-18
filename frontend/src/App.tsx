@@ -16,6 +16,7 @@ import UserForm from './containers/Seekers/UserForm';
 import UserProfile from './containers/Seekers/UserProfile';
 import { Reccomendations } from './containers/Reccomendation/FindReccomendations';
 import CompanyDashboard from './containers/Company/CompanyDashboard';
+import CompanyForm from './containers/Company/CompanyForm';
 
 const App: React.FC = () => {
     return (
@@ -33,6 +34,7 @@ const App: React.FC = () => {
                 <Route path="/user/form" element={<UserForm/>}/>
                 <Route path="/user/reccomendations" element={<Reccomendations/>}/>
                 <Route path="/company/dashboard" element={<CompanyDashboard />}/>
+                <Route path="/company/form" element={<CompanyForm/>}/>
             </Routes>
         </Router>
     );

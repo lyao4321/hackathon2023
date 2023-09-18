@@ -131,7 +131,7 @@ def mform():
         print(current_user)
 
         allowed_fields = [
-            'gender', 'age', 'location','industry', 'experience', 'company'
+            'location','industry', 'experience', 'company', 'skills'
         ]
         update_data = {key: data[key] for key in allowed_fields if key in data}
         db.company_users.update_one(current_user, {'$set': update_data})

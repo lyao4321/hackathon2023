@@ -53,7 +53,7 @@ function ResponsiveAppBar() {
 
   const pageRoutes = {
     'login':'/login',
-    'Profile': '/',
+    'Profile': '/profile',
     'Dashboard': '/dashboard',
     'Logout': '/'
   };  

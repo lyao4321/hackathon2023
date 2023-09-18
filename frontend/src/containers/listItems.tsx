@@ -20,11 +20,7 @@ const seekerNavigationRoutes = {
 };
 
 const companyNavigationRoutes = {
-  'Dashboard': { path: '/company/dahsboard', icon: <DashboardIcon /> },
-  'Applications': { path: '/applications', icon: <PaperIcon /> },
-  'Mentors': { path: '/mentors', icon: <PeopleIcon /> },
-  'Profile': { path: '/profile', icon: <BarChartIcon /> },
-  'Settings': { path: '/settings', icon: <LayersIcon /> },
+  'Dashboard': { path: '/company/dahsboard', icon: <DashboardIcon /> }
 }
 
 const secondaryNavigationRoutes = {
