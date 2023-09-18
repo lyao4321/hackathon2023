@@ -163,7 +163,7 @@ def form():
         return jsonify({'token': token}), 200
     except:
         return jsonify({'verified': False}), 401
-
+    
 @app.route('/api/recomendations', methods=['POST'])
 def getMatches():
     data = request.json()
@@ -180,84 +180,6 @@ def getMatches():
     except:
         return jsonify({'verified': False}), 401
 
-@app.route('/api/userprofile', methods=['GET'])
-def userprofile():
-    token = request.headers.get('Authorization')
-    if token and token.startswith("Bearer "):
-        token = token.split(" ")[-1]
-    if not token:
-        return jsonify({'error': 'token is missing'}), 400
-    try:
-        decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-        current_user = db.client_users.find_one({
-        '$or': [
-            {'email': decoded['username']},
-            {'username': decoded['username']}
-        ]
-    })
-        profile_details = {
-            "age": current_user['age'],
-            "gender": current_user['gender'],
-            "location": current_user['location'],
-            "industry": current_user['industry'],
-            "interests": current_user['interests'],
-            "startupExperience": current_user['experience'],
-            "university": current_user['university'],
-            "hours": current_user['hours'],
-            "skills": current_user['skills']
-        }
-        return jsonify({'username': current_user['username'],
-                        'email': current_user['email'],
-                        'avatar': 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
-                            current_user['email'], 128),
-                         'profile': profile_details}), 200
-    except:
-        return jsonify({'error': 'token is invalid'}), 400
-    
-@app.route('/api/edituserprofile', methods=['POST'])
-def edituserprofile():
-    data = request.get_json()
-    token = request.headers.get('Authorization')
-    if token and token.startswith("Bearer "):
-        token = token.split(" ")[-1]
-    else:
-        return jsonify({'error': 'token is missing'}), 400
-    try:
-        print(token)
-        decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-        current_user = db.client_users.find_one({
-        '$or': [
-            {'email': decoded['username']},
-            {'username': decoded['username']}
-        ]
-    })
-    except:
-        return jsonify({'error': 'token is invalid'}), 400
-
-@app.route('/api/updateprofile', methods=['POST'])
-def updateprofile():
-    data = request.get_json()
-    token = request.headers.get('Authorization')
-    if token and token.startswith("Bearer "):
-        token = token.split(" ")[-1]
-    try:
-        decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-        current_user = db.client_users.find_one({
-        '$or': [
-            {'email': decoded['username']},
-            {'username': decoded['username']}
-        ]
-    })
-        field = data['field'].lower()
-        value = data['value']
-        current_username = current_user['username']
-        filter_query = {"username": current_username}
-        update_query = {'$set': {field: value}}
-        db.client_users.update_one(filter_query, update_query)
-        return jsonify({'sucess': 'sucess'}), 200
-    
-    except:
-        return jsonify({'error': 'token is invalid'}), 400
         
 if __name__ == '__main__':
     app.run(debug=True)
