@@ -31,6 +31,8 @@ def get_client_either_email_or_username(credential):
         credential
     })
 
+def get_all_companies():
+    return companies_DB.find()
 
 
 
