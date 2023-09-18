@@ -4,8 +4,22 @@ import os
 from dotenv import load_dotenv
 import jwt
 from flask_cors import CORS
-
+import pandas as pd
 load_dotenv()
+from reccomendation import get_matches
+
+
+
+class RecommendationObject:
+    def __init__(self):
+        self.numerical_attributes = ["startup_experience"]
+        self.categorical_attributes = ["gender", "location", "industry"]
+        self.attribute_weights = { "location": 3.0, "startup_experience": 2.0, "industry": 2.0, "gender": 1.0 }
+        self.target = None
+        self.specs = None
+        self.data = None
+        self.num_recommendations = 5
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
@@ -286,6 +300,81 @@ def addCompanies():
         return jsonify({'sucess': 'sucess'}), 200
     except:
         return jsonify({'error': 'token is invalid'}), 400
+
+@app.route('/api/getRecMentee', methods=['POST'])
+def getRec():
+    data = request.get_json()
+    token = request.headers.get('Authorization')
+    if token and token.startswith("Bearer "):
+        token = token.split(" ")[-1]
+    try:
+        decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        current_user = db.client_users.find_one({
+        '$or': [
+            {'email': decoded['username']},
+            {'username': decoded['username']}
+        ]
+    })
+        print(current_user)
+        company_users = db.company_users.find()
+        print(company_users)
+        target = pd.DataFrame(list(company_users))
+        specs = pd.DataFrame(list(current_user))
+
+        obj = RecommendationObject()
+        obj.numerical_attributes = ["experience"]
+        obj.categorical_attributes = ["location", "industry"]
+        obj.attribute_weights = {
+            "location": 3.0,
+            "experience": 2.0,
+            "industry": 2.0,
+        }
+        obj.target = target.copy() 
+        obj.specs = specs.copy()
+        obj.data = data.copy()  
+        obj.num_recommendations = 5
+        rec = get_matches(obj)
+        return jsonify({'rec': rec}), 200
+    except:
+        return jsonify({'verified': False}), 401
+    
+@app.route('/api/getRecMentor', methods=['POST'])
+def getRec():
+    data = request.get_json()
+    token = request.headers.get('Authorization')
+    if token and token.startswith("Bearer "):
+        token = token.split(" ")[-1]
+    try:
+        decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        current_user = db.company_users.find_one({
+        '$or': [
+            {'email': decoded['username']},
+            {'username': decoded['username']}
+        ]
+    })
+        # naming is flipped but it works trust me
+        print(current_user)
+        company_users = db.client_users.find()
+        print(company_users)
+        target = pd.DataFrame(list(company_users))
+        specs = pd.DataFrame(list(current_user))
+
+        obj = RecommendationObject()
+        obj.numerical_attributes = ["experience"]
+        obj.categorical_attributes = ["location", "industry"]
+        obj.attribute_weights = {
+            "location": 3.0,
+            "experience": 2.0,
+            "industry": 2.0,
+        }
+        obj.target = target.copy() 
+        obj.specs = specs.copy()
+        obj.data = data.copy()  
+        obj.num_recommendations = 5
+        rec = get_matches(obj)
+        return jsonify({'rec': rec}), 200
+    except:
+        return jsonify({'verified': False}), 401
 
 
 if __name__ == '__main__':

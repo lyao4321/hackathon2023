@@ -44,31 +44,7 @@ def get_matches(params):
 
 data = pd.read_csv("users.csv")
 
-class RecommendationObject:
-    def __init__(self):
-        self.numerical_attributes = ["startup_experience"]
-        self.categorical_attributes = ["gender", "location", "industry"]
-        self.attribute_weights = { "location": 3.0, "startup_experience": 2.0, "industry": 2.0, "gender": 1.0 }
-        self.target = None
-        self.specs = None
-        self.data = None
-        self.num_recommendations = 5
 
-obj = RecommendationObject()
-
-obj.numerical_attributes = ["startup_experience"]
-obj.categorical_attributes = ["gender", "location", "industry"]
-obj.attribute_weights = {
-    "location": 3.0,
-    "startup_experience": 2.0,
-    "industry": 2.0,
-    "gender": 1.0
-}
-obj.target = data[data["mentor"] == False].copy() 
-obj.specs = data[data["mentor"] == True].iloc[[0]].copy()
-obj.data = data.copy()  
-obj.num_recommendations = 5
-
-
-recommendations = get_matches(obj)
-print(recommendations)
+if __name__ == "__main__":
+    recommendations = get_matches(obj)
+    print(recommendations)  
