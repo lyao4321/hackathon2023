@@ -15,12 +15,16 @@ db = client['hackathon2023']
 
 client_users = db['client_users']
 company_users = db['company_users']
+companies_DB = db['companies_db']
 
 
 def client_insert(data):
     client_users.insert_one(data)
-def company_inset(data):
+def company_insert(data):
     company_users.insert_one(data)
+
+def companies_insert(data):
+    companies_DB.insert_one(data)
 
 def get_client_either_email_or_username(credential):
     return client_users.find_one({
