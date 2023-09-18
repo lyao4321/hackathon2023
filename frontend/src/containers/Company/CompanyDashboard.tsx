@@ -94,9 +94,9 @@ export default function CompanyDashboard() {
   const [open, setOpen] = React.useState(false);
   const [companyName, setCompanyName] = React.useState<string | null>(null); 
   const inboxMessages = [
-    { sender: "John Doe", content: "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, illum ad! Repudiandae quas excepturi, et perspiciatis ducimus rerum molestias deleniti nisi itaque, iure suscipit! Ullam, corporis! Dolor et eos magni." },
-    { sender: "Alice Smith", content: "Can we arrange a meeting for next week?" },
-    { sender: "Bob Johnson", content: "I'd like to report an issue with the product..." },
+    { sender: "John Doe", content: "Would like match with you!  " },
+    { sender: "Alice Smith", content: "Would like to match with you! " },
+    { sender: "Bob Johnson", content: "Would like to match with you! " },
     // ... add more messages as needed ...
 ];
 
