@@ -118,7 +118,7 @@ def register():
         'password': password,
         'client': True,
         'gender':'',
-        'age':'',
+        'age':0,
         'location': '',
         'industry': '',
         'interests':'',
