@@ -264,5 +264,29 @@ def updateprofile():
     except:
         return jsonify({'error': 'token is invalid'}), 400
         
+@app.route('/api/getCompanies', methods=['GET'])
+def getCompanies():
+    data = request.get_json()
+    try:
+        companies = db.companies_DB.find()
+        return jsonify({'sucess': 'sucess', 'payload' : companies}), 200
+    except:
+        return jsonify({'error': 'token is invalid'}), 400
+    
+@app.route('/api/addCompanies', methods=['POST'])
+def addCompanies():
+    data = request.get_json()
+    try:
+        db.companies_DB.insert_one({
+            'name': data['name'],
+            'industry': data['industry'],
+            'location': data['location'],
+            'description': data['description'],
+        })
+        return jsonify({'sucess': 'sucess'}), 200
+    except:
+        return jsonify({'error': 'token is invalid'}), 400
+
+
 if __name__ == '__main__':
     app.run(debug=True)

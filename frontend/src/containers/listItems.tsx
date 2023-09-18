@@ -12,7 +12,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
 const seekerNavigationRoutes = {
-  'Dashboard': { path: '/', icon: <DashboardIcon /> },
+  'Menu': { path: '/', icon: <DashboardIcon /> },
   'Applications': { path: '/applications', icon: <PaperIcon /> },
   'Mentors': { path: '/mentors', icon: <PeopleIcon /> },
   'Profile': { path: '/profile', icon: <BarChartIcon /> },
@@ -20,7 +20,7 @@ const seekerNavigationRoutes = {
 };
 
 const companyNavigationRoutes = {
-  'Dashboard': { path: '/company/dahsboard', icon: <DashboardIcon /> }
+  'Dashboard': { path: '/company/dashboard', icon: <DashboardIcon /> }
 }
 
 const secondaryNavigationRoutes = {

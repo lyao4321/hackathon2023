@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 
-const pages = ['About Us', 'For Companies', 'For unemployed'];
+const pages = ['About Us', 'For Companies', 'For Unemployed'];
 const settings = ['Profile', 'Dashboard', 'Logout'];
 
 
