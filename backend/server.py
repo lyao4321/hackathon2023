@@ -172,7 +172,7 @@ def getMatches():
         decode = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'], verify=True)
         current_user = db.client_users.find_one({
         '$or': [
-            {'username': decoded['username']}
+            {'username': decode['username']}
         ]
     })
         print(current_user)
@@ -189,6 +189,7 @@ def userprofile():
         return jsonify({'error': 'token is missing'}), 400
     try:
         decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        print(decoded)
         current_user = db.client_users.find_one({
         '$or': [
             {'email': decoded['username']},
