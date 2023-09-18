@@ -18,6 +18,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainListItems, SecondaryListItems } from '../listItems';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ListItemText from '@mui/material/ListItemText';
+
 
 function Copyright(props: any) {
     return (
@@ -88,6 +93,12 @@ function Copyright(props: any) {
 export default function CompanyDashboard() {
   const [open, setOpen] = React.useState(false);
   const [companyName, setCompanyName] = React.useState<string | null>(null); 
+  const inboxMessages = [
+    { sender: "John Doe", content: "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, illum ad! Repudiandae quas excepturi, et perspiciatis ducimus rerum molestias deleniti nisi itaque, iure suscipit! Ullam, corporis! Dolor et eos magni." },
+    { sender: "Alice Smith", content: "Can we arrange a meeting for next week?" },
+    { sender: "Bob Johnson", content: "I'd like to report an issue with the product..." },
+    // ... add more messages as needed ...
+];
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -208,9 +219,40 @@ export default function CompanyDashboard() {
               </Grid>
               {/* More Company Data (maybe orders or clients) */}
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  {/* You can add a component for orders, clients, etc. */}
-                </Paper>
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+    <Typography variant="h6" gutterBottom>
+        Inbox
+    </Typography>
+    <List>
+        {inboxMessages.map((message, index) => (
+            <Box key={index}>
+                <ListItem button>
+                    <ListItemAvatar>
+                        <Avatar>
+                            {message.sender[0]}
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary={message.sender}
+                        secondary={
+                            <Box component="span" sx={{ 
+                                display: 'inline-block', 
+                                maxWidth: '100%', 
+                                overflow: 'hidden', 
+                                textOverflow: 'ellipsis', 
+                                whiteSpace: 'nowrap' 
+                            }}>
+                                {message.content}
+                            </Box>
+                        }
+                    />
+                </ListItem>
+                {index !== inboxMessages.length - 1 && <Divider />}
+            </Box>
+        ))}
+    </List>
+</Paper>
+
               </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />

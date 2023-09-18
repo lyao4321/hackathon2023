@@ -10,6 +10,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import InboxIcon from '@mui/icons-material/Inbox';
 
 const seekerNavigationRoutes = {
   'Dashboard': { path: '/', icon: <DashboardIcon /> },
