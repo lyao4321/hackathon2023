@@ -14,7 +14,7 @@ const MapComponent: React.FC = () => {
     if (mapRef.current) {
       googleMap.current = new google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
-        zoom: 12,
+        zoom: 11,
       });
 
       navigator.geolocation.getCurrentPosition((position) => {
@@ -35,7 +35,7 @@ const MapComponent: React.FC = () => {
             radius: RADIUS,
             map: googleMap.current,
             fillColor: '#AAD4F5',
-            fillOpacity: 0.6,
+            fillOpacity: 0.1,
             strokeWeight: 1,
             clickable: false,
           });
@@ -44,7 +44,7 @@ const MapComponent: React.FC = () => {
     }
   }, []);
 
-  return <div ref={mapRef} style={{ width: '50%', height: '500px' }} />;
+  return <div ref={mapRef} style={{ width: '100%', height: '500px' }} />;
 };
 
 export default MapComponent;

@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainListItems, SecondaryListItems } from '../listItems';
+import MapComponent from '../MapComponent';
 
 
 
@@ -113,6 +114,7 @@ export default function Dashboard() {
   
 
   return (
+    <>
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -185,23 +187,14 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="lg" sx={{ mt: 6, mb: 6 }}>
             <Grid container spacing={3}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-
-                </Paper>
+              <Grid item xs={7} md={8} lg={21}>
+                <MapComponent/>
               </Grid>
               
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={12} lg={100}>
                 <Paper
                   sx={{
                     p: 2,
@@ -225,5 +218,6 @@ export default function Dashboard() {
         </Box>
       </Box>
     </ThemeProvider>
+    </>
   );
 }
