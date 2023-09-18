@@ -20,7 +20,7 @@ companies_DB = db['companies_db']
 
 def client_insert(data):
     client_users.insert_one(data)
-def company_inset(data):
+def company_insert(data):
     company_users.insert_one(data)
 
 def companies_insert(data):
