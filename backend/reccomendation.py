@@ -42,7 +42,7 @@ def get_matches(params):
     return target_names
 
 
-data = pd.read_csv("users.csv")
+#data = pd.read_csv("users.csv")
 
 
 if __name__ == "__main__":

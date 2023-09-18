@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Button,
@@ -8,8 +8,14 @@ import {
     CssBaseline,
     Link,
 } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import RegisterBar from '../RegisterBar';
 import Autocomplete from '@mui/material/Autocomplete';
+
 
 function CompanyRegister(): React.ReactElement {
 
@@ -19,8 +25,93 @@ function CompanyRegister(): React.ReactElement {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [error , setError] = useState<boolean>(false);
+    const [companies, setCompanies] = useState<any[]>([]); 
+
+    const [isAddCompanyDialogOpen, setAddCompanyDialogOpen] = useState(false);
+    const [newCompany, setNewCompany] = useState({
+        name: '',
+        industry: '',
+        location: '',
+        description: ''
+    });
+
+    useEffect(() => {
+        // Function to fetch companies
+        const fetchCompanies = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/api/getCompanies');
+                if (response.status !== 200) {
+                    console.error('Failed to fetch companies');
+                    return;
+                }
+                const data = await response.json();
+                setCompanies(data);  // Assuming the API returns an array of strings
+            } catch (error) {
+                console.error('Error fetching companies:', error);
+            }
+        };
+
+        fetchCompanies();
+    }, []);
+
+     // Function to open the Add Company dialog
+     const openAddCompanyDialog = () => {
+        setAddCompanyDialogOpen(true);
+    };
+
+    // Function to close the Add Company dialog
+    const closeAddCompanyDialog = () => {
+        setAddCompanyDialogOpen(false);
+    };
+
+    const handleNewCompanyInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setNewCompany(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    // Function to handle adding a new company (you can adjust the logic as needed)
+    const handleAddCompany = async () => {
+        // Prepare the data to be sent to the server
+        const companyData = {
+            name: newCompany.name,
+            industry: newCompany.industry,
+            location: newCompany.location,
+            description: newCompany.description
+        };
+        
     
-    const companies: any[] = ['google'];
+        try {
+            const response = await fetch('http://localhost:8080/api/addCompanies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(companyData)
+            });
+            console.log("companydata")
+            console.log(companyData);
+    
+            const responseData = await response.json();
+            
+            if (response.status === 200) {
+                console.log('Company added successfully:', responseData);
+                closeAddCompanyDialog();
+                setNewCompany({
+                    name: '',
+                    industry: '',
+                    location: '',
+                    description: ''
+                });
+            } else {
+                console.error('Failed to add company:', responseData.error);
+            }
+        } catch (error) {
+            console.error('Error while adding company:', error);
+        }
+    };
 
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,23 +202,81 @@ function CompanyRegister(): React.ReactElement {
                         onChange={handleEmailChange}
                     />
 
-                    <Autocomplete
-                        id="companies"
-                        options={companies}
-                        getOptionLabel={(option: string) => option}
-                        value={company}
-                        onChange={(_, newValue: string | null) => setCompany(newValue || '')}
-                        renderInput={(params: any) => (
-                            <TextField
-                                {...params}
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                label="Company"
-                            />
-                        )}
-                    />
+<Autocomplete
+            id="companies"
+            options={[...companies.map(company => company.name), 'Add New Company']}
+            getOptionLabel={(option: string) => option}
+            value={company}
+            onChange={(_, newValue: string | null) => {
+                if (newValue === 'Add New Company') {
+                    openAddCompanyDialog();
+                } else {
+                    setCompany(newValue || '');
+                }
+            }}
+            renderInput={(params: any) => (
+                <TextField
+                    {...params}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="Company"
+                />
+            )}
+        />
+
+        {/* Add Company Dialog */}
+        <Dialog open={isAddCompanyDialogOpen} onClose={closeAddCompanyDialog}>
+            <DialogTitle>Add New Company</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Please enter the details of the new company.
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    name="name"
+                    label="Company Name"
+                    fullWidth
+                    value={newCompany.name}
+                    onChange={handleNewCompanyInputChange}
+                />
+                <TextField
+                    margin="dense"
+                    name="industry"
+                    label="Industry"
+                    fullWidth
+                    value={newCompany.industry}
+                    onChange={handleNewCompanyInputChange}
+                />
+                <TextField
+                    margin="dense"
+                    name="location"
+                    label="Location"
+                    fullWidth
+                    value={newCompany.location}
+                    onChange={handleNewCompanyInputChange}
+                />
+                <TextField
+                    margin="dense"
+                    name="description"
+                    label="Description"
+                    fullWidth
+                    value={newCompany.description}
+                    onChange={handleNewCompanyInputChange}
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={closeAddCompanyDialog} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleAddCompany} color="primary">
+                    Add
+                </Button>
+            </DialogActions>
+        </Dialog>
+        
 
                     <TextField
                         variant="outlined"
