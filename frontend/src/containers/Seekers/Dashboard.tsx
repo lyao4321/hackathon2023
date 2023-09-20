@@ -18,7 +18,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainListItems, SecondaryListItems } from '../listItems';
-import MapComponent from '../MapComponent';
 
 
 
@@ -191,7 +190,6 @@ export default function Dashboard() {
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={7} md={8} lg={21}>
-                <MapComponent/>
               </Grid>
               
               <Grid item xs={12} md={12} lg={100}>

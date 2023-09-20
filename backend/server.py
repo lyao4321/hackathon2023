@@ -326,8 +326,14 @@ def getRecMentee():
         print(current_user)
         company_users = db.company_users.find()
         print(company_users)
-        target = pd.DataFrame(list(company_users))
-        specs = pd.DataFrame(list(current_user))
+        # Convert the MongoDB cursor to a list first
+        target_list = list(company_users)
+        target = pd.DataFrame(target_list)
+        print(target)
+
+        # For a single MongoDB document
+        specs = pd.DataFrame([current_user])
+        print(specs)
 
         obj = RecommendationObject()
         obj.numerical_attributes = ["experience"]
